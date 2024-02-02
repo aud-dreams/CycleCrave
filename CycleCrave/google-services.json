@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "217712776938",
+    "project_id": "cyclecrave",
+    "storage_bucket": "cyclecrave.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217712776938:android:1d013972c0952dd6a22993",
+        "android_client_info": {
+          "package_name": "com.CycleCrave"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCW4vZABXA2X8fd7UHkwBVzG4yL6hlxSO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
