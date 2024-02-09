@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { NavigationProp } from '@react-navigation/native';
 
-const SignUp = () => {
+interface RouterProps {
+    navigation: NavigationProp<any, any>;
+}
+
+const SignUp = ({ navigation }: RouterProps) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -25,7 +30,7 @@ const SignUp = () => {
                 onChangeText={setPassword}
                 secureTextEntry
             />
-            <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Dashboard")}>
                 <Text>Create Account</Text>
             </TouchableOpacity>
         </View>
