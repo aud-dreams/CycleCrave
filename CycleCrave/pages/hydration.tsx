@@ -8,7 +8,7 @@ const hydration = () => {
     const [progressValue, setProgressValue] = useState(0);
 
 
-    const handleSignUp = (amount) => {
+    const incrementProgressBar = (amount) => {
         setProgressValue(progressValue + amount);
     };
 
@@ -28,19 +28,19 @@ const hydration = () => {
             </View>
             <View style={styles.lowerContainer}>
                 <View style={styles.buttonRow}>
-                    <TouchableOpacity style={[styles.button, styles.lightBlue]} onPress={() => handleSignUp(8)}>
+                    <TouchableOpacity style={[styles.button, styles.lightBlue]} onPress={() => incrementProgressBar(8)}>
                         <Text>8 oz</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, styles.mediumBlue]} onPress={() => handleSignUp(16)}>
+                    <TouchableOpacity style={[styles.button, styles.mediumBlue]} onPress={() => incrementProgressBar(16)}>
                         <Text>16 oz</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={styles.buttonRow}>
-                    <TouchableOpacity style={[styles.button, styles.darkBlue]} onPress={() => handleSignUp(32)}>
+                    <TouchableOpacity style={[styles.button, styles.darkBlue]} onPress={() => incrementProgressBar(32)}>
                         <Text>32 oz</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, styles.darkestBlue]} onPress={() => handleSignUp(64)}>
+                    <TouchableOpacity style={[styles.button, styles.darkestBlue]} onPress={() => incrementProgressBar(64)}>
                         <Text>64 oz</Text>
                     </TouchableOpacity>
                 </View>
