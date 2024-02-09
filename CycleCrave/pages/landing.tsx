@@ -6,7 +6,7 @@ interface RouterProps {
     navigation: NavigationProp<any, any>;
 }
 
-const landing = ({ navigation }: RouterProps) => {
+const Landing = ({ navigation }: RouterProps) => {
     const logo = require('../assets/CycleCraveLogo.png');
 
     return (
@@ -44,14 +44,13 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
     logo: {
-        maxHeight: 400,
-        maxWidth: 400,
-        marginTop: -40,
-        marginBottom: 10,
+        maxHeight: 150,
+        maxWidth: 150,
+        marginBottom: 30,
     },
     text: {
         fontSize: 16,
     },
 });
 
-export default landing;
+export default Landing;

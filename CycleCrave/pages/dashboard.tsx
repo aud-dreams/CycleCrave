@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
-const dashboard = () => {
+const Dashboard = () => {
     return (
         <View style={styles.container}>
             <Text>dummy dashboard :P</Text>
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default dashboard;
+export default Dashboard;

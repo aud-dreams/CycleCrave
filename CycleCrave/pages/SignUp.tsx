@@ -31,7 +31,7 @@ const SignUp = ({ navigation }: RouterProps) => {
                 onChangeText={setPassword}
                 secureTextEntry
             />
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Dashboard")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("BottomTabNav")}>
                 <Text style={styles.text}>Create Account</Text>
             </TouchableOpacity>
         </View>

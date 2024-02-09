@@ -1,10 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import SignUp from './pages/SignUp'
-import landing from './pages/landing'
-import dashboard from './pages/dashboard'
+import Landing from './pages/landing'
+import Dashboard from './pages/dashboard'
 import { useFonts } from 'expo-font'
 import { Cormorant_400Regular, Cormorant_700Bold } from '@expo-google-fonts/cormorant';
+import BottomTabNav from './components/navbar'
 
 const Stack = createNativeStackNavigator()
 
@@ -18,8 +19,13 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Landing'>
         <Stack.Screen
+          name="BottomTabNav"
+          component={BottomTabNav}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Landing"
-          component={landing}
+          component={Landing}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -29,7 +35,7 @@ function App() {
         />
         <Stack.Screen
           name='Dashboard'
-          component={dashboard}
+          component={Dashboard}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
