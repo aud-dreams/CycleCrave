@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 
@@ -14,7 +14,7 @@ const landing = ({ navigation }: RouterProps) => {
             <Image source={logo} resizeMode="contain" style={styles.logo}></Image>
             <Text style={styles.name}>CycleCrave</Text>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SignUp")}>
-                <Text>Get Started</Text>
+                <Text style={styles.text}>Get Started</Text>
             </TouchableOpacity>
         </View>
     )
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 40,
         color: "#FF898D",
-        fontFamily: 'HelveticaNeue',
+        fontFamily: 'Cormorant_700Bold',
     },
     button: {
         width: '45%',
@@ -48,6 +48,9 @@ const styles = StyleSheet.create({
         maxWidth: 400,
         marginTop: -40,
         marginBottom: 10,
+    },
+    text: {
+        fontSize: 16,
     },
 });
 

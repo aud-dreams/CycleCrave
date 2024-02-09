@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 
@@ -31,7 +32,7 @@ const SignUp = ({ navigation }: RouterProps) => {
                 secureTextEntry
             />
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Dashboard")}>
-                <Text>Create Account</Text>
+                <Text style={styles.text}>Create Account</Text>
             </TouchableOpacity>
         </View>
     );
@@ -43,11 +44,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#FFF4F3',
-    },
-    header: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
     },
     input: {
         width: '80%',
@@ -68,7 +64,10 @@ const styles = StyleSheet.create({
         backgroundColor: "#FEDBD5",
         borderColor: "#FF898D",
         marginTop: 20,
-    }
+    },
+    text: {
+        fontSize: 16,
+    },
 });
 
 export default SignUp;
