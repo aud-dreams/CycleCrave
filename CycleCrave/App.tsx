@@ -6,6 +6,7 @@ import Dashboard from './pages/dashboard'
 import { useFonts } from 'expo-font'
 import { Cormorant_400Regular, Cormorant_700Bold } from '@expo-google-fonts/cormorant';
 import BottomTabNav from './components/navbar'
+import hydration from './pages/hydration'
 
 const Stack = createNativeStackNavigator()
 
@@ -38,6 +39,7 @@ function App() {
           component={Dashboard}
           options={{ headerShown: false }}
         />
+      <Stack.Screen name="hydration" component={hydration} />
       </Stack.Navigator>
     </NavigationContainer>
   );
