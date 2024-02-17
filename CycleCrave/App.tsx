@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import SignUp from './pages/SignUp'
 import hydration from './pages/hydration'
+import period from './pages/period'
 
 import { PaperProvider } from 'react-native-paper';
 
@@ -12,7 +13,7 @@ function App() {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="hydration" component={hydration} />
+          <Stack.Screen name="period" component={period} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

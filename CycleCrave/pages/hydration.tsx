@@ -5,12 +5,19 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import CircularProgress from 'react-native-circular-progress-indicator';
 
 const hydration = () => {
+    // declare state variable called progressValue using the useState hook
+    // useState hook returns array w 2 elems, curr state value (progressValue) & func to update that value (setProgressValue)
+    // set progressValue to 0
     const [progressValue, setProgressValue] = useState(0);
 
-
+    // calls setProgressValue to update progressValue w/ amount
     const incrementProgressBar = (amount) => {
         setProgressValue(progressValue + amount);
     };
+
+    // const resetProgressBar = () => {
+    //     setProgressValue(0);
+    // };
 
     return (
         <View style={styles.container}>
@@ -44,6 +51,12 @@ const hydration = () => {
                         <Text>64 oz</Text>
                     </TouchableOpacity>
                 </View>
+                {/* <View style={styles.buttonRow}>
+                    <TouchableOpacity style={[styles.button, styles.darkestBlue]} onPress={() => resetProgressBar()}>
+                        <Text>Reset</Text>
+                    </TouchableOpacity>
+                </View> */}
+
             </View>
         </View>
     );
@@ -54,6 +67,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center', // Center items vertically
         alignItems: 'center', // Center items horizontally
+        backgroundColor: '#FFF4F3'
     },
     buttonRow: {
         flexDirection: 'row', // Arrange buttons horizontally
