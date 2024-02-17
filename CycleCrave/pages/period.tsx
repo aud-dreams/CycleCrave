@@ -126,10 +126,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row', // Arrange buttons horizontally
         marginBottom: 2, // Add spacing between rows
         // justifyContent: 'space-between',
+        // justifyContent: 'center', // Center items vertically
+
     },
     buttonContainer: {
         flexDirection: 'row', // Allow button to expand horizontally
-        // alignItems: 'center', // Align items vertically
+        alignItems: 'center', // Align items vertically
+        justifyContent: 'center', // Center items vertically
+
 
     },
     buttonPressed: {
