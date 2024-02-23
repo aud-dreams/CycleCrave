@@ -9,7 +9,9 @@ const hydration = () => {
 
 
     const incrementProgressBar = (amount) => {
-        setProgressValue(progressValue + amount);
+        // ensure progressValue doesn't exceed maxValue of 100
+        const newProgressValue = Math.min(progressValue + amount, 100);
+        setProgressValue(newProgressValue);
     };
 
     return (
