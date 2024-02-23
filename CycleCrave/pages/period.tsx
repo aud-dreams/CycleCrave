@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
-
 
 const period = () => {
     const [buttonPressed, setButtonPressed] = useState(false);
@@ -139,6 +137,39 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 10,
     },
+
+    upperContainer: {
+        flex: 6, // takes 2/3 of the screen
+        paddingTop: 200,
+        justifyContent: 'center'
+    },
+
+    lowerContainer: {
+        flex: 4, // takes 1/3 of the screen
+        justifyContent: 'flex-end', // align content to the bottom
+        paddingTop: 400,
+        paddingBottom: 200, // add some padding to create space between the buttons and the bottom
+    },
+    card_template: {
+        width: 350,
+        height: 200,
+        backgroundColor: "#ffffff",
+        borderRadius: 10,
+        // alignItems: 'center', // Center content horizontally
+        justifyContent: 'center', // Center content vertically
+
+    },
+
+    section_title: {
+        marginTop: 20,
+
+        fontWeight: 'bold'
+    },
+
+    section_text: {
+        marginBottom: 20,
+    },
+
     button: {
         paddingVertical: 15, // Increase vertical padding to make the button taller
         paddingHorizontal: 25, // Increase horizontal padding to make the button wider
@@ -150,4 +181,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Period;
+export default period;
