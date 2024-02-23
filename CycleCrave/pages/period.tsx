@@ -6,15 +6,9 @@ import { white } from 'react-native-paper/lib/typescript/styles/themes/v2/colors
 const period = () => {
     const [buttonPressed, setButtonPressed] = useState(false);
 
-    const handlePressIn = () => {
-        setButtonPressed(true);
+    const handlePress = () => {
+        setButtonPressed(!buttonPressed);
     };
-
-    const handlePressOut = () => {
-        setButtonPressed(false);
-    };
-
-
 
     return (
 
@@ -25,42 +19,40 @@ const period = () => {
                 <View style={styles.card_template}>
                     <View style={styles.buttonRow}>
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : null]} onPressIn={handlePressIn}
-                                onPressOut={handlePressOut}>
+                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
                                 <Text>Mood Swings</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]} onPressIn={handlePressIn}
-                                onPressOut={handlePressOut}>
+                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
                                 <Text>Headache</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.buttonRow}>
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]} onPressIn={handlePressIn}
-                                onPressOut={handlePressOut}>
+                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
+
                                 <Text>Period Cramps</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]} onPressIn={handlePressIn}
-                                onPressOut={handlePressOut}>
+                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
+
                                 <Text> PMS </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.buttonRow}>
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]} onPressIn={handlePressIn}
-                                onPressOut={handlePressOut}>
+                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
+
                                 <Text>Bloated</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]} onPressIn={handlePressIn}
-                                onPressOut={handlePressOut}>
+                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
+
                                 <Text>Constipated</Text>
                             </TouchableOpacity>
                         </View>
@@ -137,7 +129,11 @@ const styles = StyleSheet.create({
 
     },
     buttonPressed: {
-        backgroundColor: "#CFAEA9", // Change to darker color when pressed
+        backgroundColor: "#FF898D", // Change to darker color when pressed
+    },
+
+    defaultButton: {
+        backgroundColor: "#FEDBD5", // default button
     },
     header: {
         fontSize: 20,
