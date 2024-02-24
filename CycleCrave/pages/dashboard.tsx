@@ -12,7 +12,15 @@ const Dashboard = () => {
   const renderHearts = (count) => {
     let hearts = [];
     for (let i = 0; i < 5; i++) {
-      hearts.push(<Icon key={i} name="heart" size={30} color="#FF69B4" />);
+      hearts.push(
+        <Icon
+          key={i}
+          name="heart"
+          size={25}
+          color="#FF898D"
+          style={styles.heartIcon}
+        />
+      );
     }
     return hearts;
   };
@@ -20,9 +28,23 @@ const Dashboard = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.greeting}>Hi, Audrey</Text>
-      <Calendar
-      // ...any props you want to pass to the calendar
-      />
+
+      <View style={styles.calendarContainer}>
+        <Calendar
+          theme={{
+            // textSectionTitleColor: "#FF898D",
+            textDayFontSize: 14,
+            textMonthFontSize: 16,
+            textDayHeaderFontSize: 14,
+            todayTextColor: "#FF898D",
+            // dayTextColor: "#FF898D",
+            // selectedDayBackgroundColor: "#FF898D",
+            arrowColor: "#FF898D",
+            monthTextColor: "#FF898D",
+          }}
+        />
+      </View>
+
       <View style={styles.category}>
         <Text style={styles.categoryTitle}>SYMPTOMS</Text>
         <View style={styles.heartsContainer}>{renderHearts(symptoms)}</View>
@@ -49,28 +71,52 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFF4F3",
+  },
+  calendarContainer: {
+    borderWidth: 1,
+    borderColor: "#d3d3d3",
+    width: 350,
+    marginTop: 10,
+    marginBottom: 20,
+    backgroundColor: "#ffe4e1",
   },
   greeting: {
-    fontSize: 24,
+    alignSelf: "flex-start",
     fontWeight: "bold",
     marginVertical: 20,
+    fontSize: 35,
+    fontFamily: "Cormorant_700Bold",
+    paddingLeft: 30,
+    marginTop: -80,
   },
   category: {
-    width: "100%",
+    width: 350,
     alignItems: "center",
     marginVertical: 10,
     padding: 10,
     borderRadius: 15,
     backgroundColor: "#ffe4e1",
+    // box shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
   },
   categoryTitle: {
-    fontSize: 18,
-    fontWeight: "600",
+    alignSelf: "flex-start",
+    fontSize: 14,
+    fontWeight: "bold",
+    paddingLeft: 10,
   },
   heartsContainer: {
+    alignSelf: "flex-start",
     flexDirection: "row",
     marginTop: 10,
+    paddingLeft: 10,
+  },
+  heartIcon: {
+    marginHorizontal: 2,
   },
 });
 
