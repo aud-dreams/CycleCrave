@@ -2,10 +2,24 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 const period = () => {
-    const [buttonPressed, setButtonPressed] = useState(false);
+    const [buttonPressed, setActiveButtons] = useState({});
 
-    const handlePress = () => {
-        setButtonPressed(!buttonPressed);
+    const handlePress = (title) => {
+        setActiveButtons(prevState => ({
+            ...prevState,
+            [title]: !prevState[title]
+        }));
+    };
+
+    const ToggleButton = ({ title, buttonPressed, handlePress }) => {
+        return (
+            <TouchableOpacity
+                style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]}
+                onPress={() => handlePress(title)}
+            >
+                <Text>{title}</Text>
+            </TouchableOpacity>
+        );
     };
 
     return (
@@ -14,45 +28,16 @@ const period = () => {
                 <Text style={styles.section_title}>Symptoms</Text>
                 <Text style={styles.section_text}>Select all that apply</Text>
                 <View style={styles.card_template}>
-                    <View style={styles.buttonRow}>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
-                                <Text>Mood Swings</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
-                                <Text>Headache</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.buttonRow}>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
-
-                                <Text>Period Cramps</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
-
-                                <Text> PMS </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.buttonRow}>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
-
-                                <Text>Bloated</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]} onPress={handlePress}>
-
-                                <Text>Constipated</Text>
-                            </TouchableOpacity>
-                        </View>
+                    <View style={styles.buttonContainer}>
+                        {/* Map through an array of titles to create a button for each */}
+                        {['Mood Swings', 'Headache', 'Period Cramps', 'PMS', 'Bloating', 'Constipation'].map((title) => (
+                            <ToggleButton
+                                key={title} // Use a unique key for each button
+                                title={title}
+                                buttonPressed={!!buttonPressed[title]}
+                                handlePress={handlePress}
+                            />
+                        ))}
                     </View>
 
                 </View>
@@ -61,37 +46,16 @@ const period = () => {
                 <Text style={styles.section_title}>Cravings</Text>
                 <Text style={styles.section_text}>Select all that apply</Text>
                 <View style={styles.card_template}>
-                    <View style={styles.buttonRow}>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]}>
-                                <Text>Sweet</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]}>
-                                <Text>      Salty      </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.buttonRow}>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]} >
-                                <Text>    Thirsty    </Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]} >
-                                <Text>Fruity</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.buttonRow}>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={[styles.button]}>
-                                <Text>Crispy</Text>
-                            </TouchableOpacity>
-                        </View>
-
+                    <View style={styles.buttonContainer}>
+                        {/* Map through an array of titles to create a button for each */}
+                        {['Sweet Cravings', 'Salty Cravings', 'Thirst', 'Fruity Cravings', 'Crispy Cravings'].map((title) => (
+                            <ToggleButton
+                                key={title} // Use a unique key for each button
+                                title={title}
+                                buttonPressed={!!buttonPressed[title]}
+                                handlePress={handlePress}
+                            />
+                        ))}
                     </View>
                 </View>
 
@@ -120,10 +84,10 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flexDirection: 'row', // Allow button to expand horizontally
-        alignItems: 'center', // Align items vertically
-        justifyContent: 'center', // Center items vertically
-
-
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
+        marginVertical: 10,
+        marginHorizontal: 10,
     },
     buttonPressed: {
         backgroundColor: "#FF898D", // Change to darker color when pressed
@@ -178,6 +142,10 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         backgroundColor: '#FFF4F3',
+        borderRadius: 10,
+        marginBottom: 10,
+        marginHorizontal: 10,
+
     },
 });
 
