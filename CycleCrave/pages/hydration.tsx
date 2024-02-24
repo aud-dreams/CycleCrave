@@ -16,6 +16,7 @@ const hydration = () => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.header}> Hydration </Text>
             <View style={styles.upperContainer}>
                 <CircularProgress
                     value={progressValue}
@@ -56,13 +57,15 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center', // Center items vertically
         alignItems: 'center', // Center items horizontally
+        backgroundColor: '#FFF4F3'
     },
     buttonRow: {
         flexDirection: 'row', // Arrange buttons horizontally
         marginBottom: 10, // Add spacing between rows
     },
     header: {
-        fontSize: 20,
+        marginTop: 50,
+        fontSize: 30,
         textAlign: 'center',
         margin: 10,
     },
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
 
     upperContainer: {
         flex: 6, // takes 2/3 of the screen
-        paddingTop: 100,
+        paddingTop: 10,
         justifyContent: 'center'
     },
 

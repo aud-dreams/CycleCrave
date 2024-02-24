@@ -10,7 +10,7 @@ import {
 } from "@expo-google-fonts/cormorant";
 import BottomTabNav from "./components/navbar";
 import hydration from "./pages/hydration";
-import Nutrition from "./pages/nutrition";
+import nutrition from "./pages/nutrition";
 
 const Stack = createNativeStackNavigator();
 
@@ -50,7 +50,7 @@ function App() {
         />
         <Stack.Screen
           name="Nutrition"
-          component={Nutrition}
+          component={nutrition}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

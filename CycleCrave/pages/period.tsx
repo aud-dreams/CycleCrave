@@ -11,7 +11,7 @@ const period = () => {
         }));
     };
 
-    const ToggleButton = ({ title, buttonPressed, handlePress }) => {
+    const NewButton = ({ title, buttonPressed, handlePress }) => {
         return (
             <TouchableOpacity
                 style={[styles.button, buttonPressed ? styles.buttonPressed : styles.defaultButton]}
@@ -24,6 +24,8 @@ const period = () => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.header}> Period </Text>
+
             <View style={styles.upperContainer}>
                 <Text style={styles.section_title}>Symptoms</Text>
                 <Text style={styles.section_text}>Select all that apply</Text>
@@ -31,7 +33,7 @@ const period = () => {
                     <View style={styles.buttonContainer}>
                         {/* Map through an array of titles to create a button for each */}
                         {['Mood Swings', 'Headache', 'Period Cramps', 'PMS', 'Bloating', 'Constipation'].map((title) => (
-                            <ToggleButton
+                            <NewButton
                                 key={title} // Use a unique key for each button
                                 title={title}
                                 buttonPressed={!!buttonPressed[title]}
@@ -49,7 +51,7 @@ const period = () => {
                     <View style={styles.buttonContainer}>
                         {/* Map through an array of titles to create a button for each */}
                         {['Sweet Cravings', 'Salty Cravings', 'Thirst', 'Fruity Cravings', 'Crispy Cravings'].map((title) => (
-                            <ToggleButton
+                            <NewButton
                                 key={title} // Use a unique key for each button
                                 title={title}
                                 buttonPressed={!!buttonPressed[title]}
@@ -97,7 +99,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#FEDBD5", // default button
     },
     header: {
-        fontSize: 20,
+        marginTop: 50,
+        fontSize: 30,
         textAlign: 'center',
         margin: 10,
     },
@@ -126,7 +129,6 @@ const styles = StyleSheet.create({
 
     section_title: {
         marginTop: 20,
-
         fontWeight: 'bold'
     },
 
