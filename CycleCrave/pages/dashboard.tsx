@@ -4,6 +4,7 @@ import { Calendar } from "react-native-calendars";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const Dashboard = () => {
+  // set useStates for hearts
   const [symptoms, setSymptoms] = useState(2);
   const [water, setWater] = useState(4);
   const [sleep, setSleep] = useState(3);
@@ -25,23 +26,51 @@ const Dashboard = () => {
     return hearts;
   };
 
+  // set useStates for calendar
+  const [selected, setSelected] = useState("");
+
   return (
     <View style={styles.container}>
       <Text style={styles.greeting}>Hi, Audrey</Text>
 
       <View style={styles.calendarContainer}>
         <Calendar
+          onDayPress={(day) => {
+            setSelected(day.dateString);
+          }}
           theme={{
-            // textSectionTitleColor: "#FF898D",
             textDayFontSize: 14,
             textMonthFontSize: 16,
             textDayHeaderFontSize: 14,
             todayTextColor: "#FF898D",
-            // dayTextColor: "#FF898D",
-            // selectedDayBackgroundColor: "#FF898D",
             arrowColor: "#FF898D",
             monthTextColor: "#FF898D",
           }}
+          // example sequence of dates
+          markedDates={{
+            "2024-02-20": {
+              startingDay: true,
+              color: "#FF898D",
+              textColor: "white",
+            },
+            "2024-02-21": {
+              selected: true,
+              color: "#FF898D",
+              textColor: "white",
+            },
+            "2024-02-22": {
+              selected: true,
+              color: "#FF898D",
+              textColor: "white",
+            },
+            "2024-02-23": {
+              selected: true,
+              endingDay: true,
+              color: "#FF898D",
+              textColor: "white",
+            },
+          }}
+          markingType={"period"}
         />
       </View>
 
@@ -57,10 +86,10 @@ const Dashboard = () => {
         <Text style={styles.categoryTitle}>SLEEP</Text>
         <View style={styles.heartsContainer}>{renderHearts(sleep)}</View>
       </View>
-      <View style={styles.category}>
+      {/* <View style={styles.category}>
         <Text style={styles.categoryTitle}>NUTRITION</Text>
         <View style={styles.heartsContainer}>{renderHearts(nutrition)}</View>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -69,7 +98,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     padding: 10,
     backgroundColor: "#FFF4F3",
   },
@@ -88,12 +117,12 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontFamily: "Cormorant_700Bold",
     paddingLeft: 30,
-    marginTop: -80,
+    marginTop: 50,
   },
   category: {
     width: 350,
     alignItems: "center",
-    marginVertical: 10,
+    marginVertical: 15,
     padding: 10,
     borderRadius: 15,
     backgroundColor: "#ffe4e1",

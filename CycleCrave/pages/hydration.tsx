@@ -13,6 +13,9 @@ import CircularProgress from "react-native-circular-progress-indicator";
 const hydration = () => {
   const [progressValue, setProgressValue] = useState(0);
 
+  // hardcoded goal !!
+  const goal = 100;
+
   const incrementProgressBar = (amount) => {
     // ensure progressValue doesn't exceed maxValue of 100
     const newProgressValue = Math.min(progressValue + amount, 100);
@@ -24,15 +27,17 @@ const hydration = () => {
       <Text style={styles.header}>Hydration</Text>
       <View style={styles.upperContainer}>
         <CircularProgress
-          value={progressValue}
+          value={(progressValue / goal) * 100}
           radius={120}
           duration={500}
           progressValueColor={"black"}
-          maxValue={100}
-          title={"oz"}
+          maxValue={goal}
+          title={`oz`}
           titleColor={"black"}
-          titleStyle={{ fontWeight: "bold" }}
           activeStrokeColor={"#BBE0FF"}
+          inActiveStrokeColor={"#D9D9D9"}
+          activeStrokeWidth={20}
+          inActiveStrokeWidth={20}
         />
       </View>
       <View style={styles.lowerContainer}>
@@ -73,7 +78,7 @@ const hydration = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center", // Center items vertically
+    justifyContent: "flex-start", // Center items vertically
     alignItems: "center", // Center items horizontally
     backgroundColor: "#FFF4F3",
     padding: 10,
@@ -86,18 +91,18 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     fontSize: 35,
     fontFamily: "Cormorant_700Bold",
+    marginTop: 50,
   },
   button: {
     paddingVertical: 15, // Increase vertical padding to make the button taller
     paddingHorizontal: 30, // Increase horizontal padding to make the button wider
     width: 150,
-    margin: 8,
     alignItems: "center",
     borderRadius: 10,
     borderWidth: 1,
     backgroundColor: "#FEDBD5",
     flex: 1,
-    marginHorizontal: 5,
+    margin: 8,
     // box shadow
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -106,7 +111,7 @@ const styles = StyleSheet.create({
   },
   upperContainer: {
     flex: 6, // takes 2/3 of the screen
-    justifyContent: "center",
+    justifyContent: "flex-end",
     paddingTop: 30,
   },
   lowerContainer: {
@@ -131,8 +136,7 @@ const styles = StyleSheet.create({
     borderColor: "#75C1FF", // Light blue
   },
   buttonText: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 16,
   },
 });
 
