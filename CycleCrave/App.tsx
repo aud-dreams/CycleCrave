@@ -23,7 +23,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Period">
+      <Stack.Navigator initialRouteName="Landing">
         <Stack.Screen
           name="BottomTabNav"
           component={BottomTabNav}

@@ -5,7 +5,7 @@ const Nutrition = () => {
   const NewCard = ({ title }) => {
     return (
       <View style={[styles.card_template]}>
-        <Text style={styles.header}>{title}</Text>
+        <Text style={styles.section_title}>{title}</Text>
       </View>
     );
   };
@@ -40,32 +40,33 @@ const Nutrition = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center", // Center items vertically
+    justifyContent: "flex-start", // Center items vertically
     alignItems: "center", // Center items horizontally
     backgroundColor: "#FFF4F3",
+    padding: 10,
   },
-
   header: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10,
+    fontWeight: "bold",
+    marginVertical: 20,
+    fontSize: 35,
+    fontFamily: "Cormorant_700Bold",
+    marginTop: 50,
   },
-
   cardContainer: {
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-
   card_template: {
     width: 350,
-    height: 200,
-    backgroundColor: "#ffffff",
+    height: 300,
+    backgroundColor: "#D5ECD5",
     borderRadius: 10,
     justifyContent: "center", // Center content vertically
-    marginBottom: 10,
+    marginBottom: 30,
+    borderWidth: 1,
+    borderColor: "#d3d3d3",
   },
-
   photo_template: {
     width: 300,
     height: 100,
@@ -74,31 +75,16 @@ const styles = StyleSheet.create({
     justifyContent: "center", // Center content vertically
     marginBottom: 10,
   },
-
   section_title: {
-    marginTop: 20,
     fontWeight: "bold",
+    paddingLeft: 15,
+    fontSize: 20,
   },
-
   scrollView: {
     maxHeight: 700, // Adjust the maximum height as needed
   },
-
   section_text: {
     marginBottom: 20,
-  },
-
-  button: {
-    paddingVertical: 15, // Increase vertical padding to make the button taller
-    paddingHorizontal: 25, // Increase horizontal padding to make the button wider
-    padding: 8,
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
-    backgroundColor: "#FFF4F3",
-    borderRadius: 10,
-    marginBottom: 10,
-    marginHorizontal: 10,
   },
 });
 
