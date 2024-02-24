@@ -10,7 +10,7 @@ import {
 
 import CircularProgress from "react-native-circular-progress-indicator";
 
-const hydration = () => {
+const Hydration = () => {
   const [progressValue, setProgressValue] = useState(0);
 
   // hardcoded goal !!
@@ -140,4 +140,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default hydration;
+export default Hydration;

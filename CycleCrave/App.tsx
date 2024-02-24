@@ -9,8 +9,9 @@ import {
   Cormorant_700Bold,
 } from "@expo-google-fonts/cormorant";
 import BottomTabNav from "./components/navbar";
-import hydration from "./pages/hydration";
-import nutrition from "./pages/nutrition";
+import Hydration from "./pages/hydration";
+import Nutrition from "./pages/nutrition";
+import Period from "./pages/period";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Landing">
+      <Stack.Navigator initialRouteName="Period">
         <Stack.Screen
           name="BottomTabNav"
           component={BottomTabNav}
@@ -45,12 +46,17 @@ function App() {
         />
         <Stack.Screen
           name="Hydration"
-          component={hydration}
+          component={Hydration}
           options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Nutrition"
-          component={nutrition}
+          component={Nutrition}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Period"
+          component={Period}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
