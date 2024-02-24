@@ -8,18 +8,18 @@ const nutrition = () => {
             <View
                 style={[styles.card_template]}
             >
-                <Text>{title}</Text>
+                <Text style={styles.header}>{title}</Text>
             </View>
         );
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}> Hydration </Text>
+            <Text style={styles.header}> Nutrition </Text>
 
             <ScrollView contentContainerStyle={styles.cardContainer} style={styles.scrollView}>
                 {/* Map through an array of titles to create a button for each */}
-                {['Mood Swings', 'Headache', 'Period Cramps', 'PMS', 'Bloating', 'Constipation'].map((title) => (
+                {['Whole Grains', 'Leafy Greens', 'Nuts and Seeds', 'Lean Proteins', 'Colorful Vegetables', 'Fruits'].map((title) => (
                     <NewCard
                         key={title} // Use a unique key for each button
                         title={title}
@@ -59,13 +59,22 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 
+    photo_template: {
+        width: 300,
+        height: 100,
+        backgroundColor: "#ffffff",
+        borderRadius: 10,
+        justifyContent: 'center', // Center content vertically
+        marginBottom: 10,
+    },
+
     section_title: {
         marginTop: 20,
         fontWeight: 'bold'
     },
 
     scrollView: {
-        maxHeight: 400, // Adjust the maximum height as needed
+        maxHeight: 700, // Adjust the maximum height as needed
     },
 
     section_text: {
