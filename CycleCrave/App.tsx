@@ -1,14 +1,18 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import SignUp from './pages/SignUp'
-import Landing from './pages/landing'
-import Dashboard from './pages/dashboard'
-import { useFonts } from 'expo-font'
-import { Cormorant_400Regular, Cormorant_700Bold } from '@expo-google-fonts/cormorant';
-import BottomTabNav from './components/navbar'
-import hydration from './pages/hydration'
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import SignUp from "./pages/SignUp";
+import Landing from "./pages/landing";
+import Dashboard from "./pages/dashboard";
+import { useFonts } from "expo-font";
+import {
+  Cormorant_400Regular,
+  Cormorant_700Bold,
+} from "@expo-google-fonts/cormorant";
+import BottomTabNav from "./components/navbar";
+import hydration from "./pages/hydration";
+import Nutrition from "./pages/nutrition";
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 function App() {
   let [fontsLoaded] = useFonts({
@@ -18,7 +22,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Landing'>
+      <Stack.Navigator initialRouteName="Landing">
         <Stack.Screen
           name="BottomTabNav"
           component={BottomTabNav}
@@ -35,11 +39,20 @@ function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name='Dashboard'
+          name="Dashboard"
           component={Dashboard}
           options={{ headerShown: false }}
         />
-      <Stack.Screen name="hydration" component={hydration} />
+        <Stack.Screen
+          name="Hydration"
+          component={hydration}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Nutrition"
+          component={Nutrition}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
