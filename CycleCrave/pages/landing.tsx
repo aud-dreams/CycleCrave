@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: "#FEDBD5",
     borderColor: "#FF898D",
-    marginTop: 50,
+    marginTop: 30,
   },
   logo: {
     maxHeight: 150,
