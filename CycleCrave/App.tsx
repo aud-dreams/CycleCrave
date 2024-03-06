@@ -1,25 +1,29 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignUp from "./pages/SignUp";
-import Landing from "./pages/landing";
-import Dashboard from "./pages/dashboard";
-import { useFonts } from "expo-font";
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import SignUp from './pages/SignUp'
+import Landing from './pages/landing'
+import Dashboard from './pages/dashboard'
+import { useFonts } from 'expo-font'
 import {
   Cormorant_400Regular,
   Cormorant_700Bold,
-} from "@expo-google-fonts/cormorant";
-import BottomTabNav from "./components/navbar";
-import Hydration from "./pages/hydration";
-import Nutrition from "./pages/nutrition";
-import Period from "./pages/period";
+} from '@expo-google-fonts/cormorant'
+import BottomTabNav from './components/navbar'
+import Hydration from './pages/hydration'
+import Nutrition from './pages/nutrition'
+import Period from './pages/period'
+import SignIn from './pages/SignIn'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 function App() {
   let [fontsLoaded] = useFonts({
     Cormorant_400Regular,
     Cormorant_700Bold,
-  });
+  })
 
   return (
     <NavigationContainer>
@@ -37,6 +41,11 @@ function App() {
         <Stack.Screen
           name="SignUp"
           component={SignUp}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignIn"
+          component={SignIn}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -61,7 +70,7 @@ function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
 
-export default App;
+export default App

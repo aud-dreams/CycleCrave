@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Calendar } from "react-native-calendars";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Calendar } from 'react-native-calendars'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import { auth } from '../firebaseConfig'
 
 const Dashboard = () => {
   // set useStates for hearts
-  const [symptoms, setSymptoms] = useState(2);
-  const [water, setWater] = useState(4);
-  const [sleep, setSleep] = useState(3);
-  const [nutrition, setNutrition] = useState(1);
+  const [symptoms, setSymptoms] = useState(2)
+  const [water, setWater] = useState(4)
+  const [sleep, setSleep] = useState(3)
+  const [nutrition, setNutrition] = useState(1)
 
   const renderHearts = (count) => {
-    let hearts = [];
+    let hearts = []
     for (let i = 0; i < 5; i++) {
       hearts.push(
         <Icon
@@ -21,56 +22,56 @@ const Dashboard = () => {
           color="#FF898D"
           style={styles.heartIcon}
         />
-      );
+      )
     }
-    return hearts;
-  };
+    return hearts
+  }
 
   // set useStates for calendar
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState('')
 
   return (
     <View style={styles.container}>
-      <Text style={styles.greeting}>Hi, Audrey</Text>
+      <Text style={styles.greeting}>Hi {auth.currentUser.displayName}</Text>
 
       <View style={styles.calendarContainer}>
         <Calendar
           onDayPress={(day) => {
-            setSelected(day.dateString);
+            setSelected(day.dateString)
           }}
           theme={{
             textDayFontSize: 14,
             textMonthFontSize: 16,
             textDayHeaderFontSize: 14,
-            todayTextColor: "#FF898D",
-            arrowColor: "#FF898D",
-            monthTextColor: "#FF898D",
+            todayTextColor: '#FF898D',
+            arrowColor: '#FF898D',
+            monthTextColor: '#FF898D',
           }}
           // example sequence of dates
           markedDates={{
-            "2024-02-20": {
+            '2024-02-20': {
               startingDay: true,
-              color: "#FF898D",
-              textColor: "white",
+              color: '#FF898D',
+              textColor: 'white',
             },
-            "2024-02-21": {
+            '2024-02-21': {
               selected: true,
-              color: "#FF898D",
-              textColor: "white",
+              color: '#FF898D',
+              textColor: 'white',
             },
-            "2024-02-22": {
+            '2024-02-22': {
               selected: true,
-              color: "#FF898D",
-              textColor: "white",
+              color: '#FF898D',
+              textColor: 'white',
             },
-            "2024-02-23": {
+            '2024-02-23': {
               selected: true,
               endingDay: true,
-              color: "#FF898D",
-              textColor: "white",
+              color: '#FF898D',
+              textColor: 'white',
             },
           }}
-          markingType={"period"}
+          markingType={'period'}
         />
       </View>
 
@@ -91,62 +92,62 @@ const Dashboard = () => {
         <View style={styles.heartsContainer}>{renderHearts(nutrition)}</View>
       </View> */}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-start",
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     padding: 10,
-    backgroundColor: "#FFF4F3",
+    backgroundColor: '#FFF4F3',
   },
   calendarContainer: {
     borderWidth: 1,
-    borderColor: "#d3d3d3",
+    borderColor: '#d3d3d3',
     width: 350,
     marginTop: 10,
     marginBottom: 20,
-    backgroundColor: "#ffe4e1",
+    backgroundColor: '#ffe4e1',
   },
   greeting: {
-    alignSelf: "flex-start",
-    fontWeight: "bold",
+    alignSelf: 'flex-start',
+    fontWeight: 'bold',
     marginVertical: 20,
     fontSize: 35,
-    fontFamily: "Cormorant_700Bold",
+    fontFamily: 'Cormorant_700Bold',
     paddingLeft: 30,
     marginTop: 50,
   },
   category: {
     width: 350,
-    alignItems: "center",
+    alignItems: 'center',
     marginVertical: 15,
     padding: 10,
     borderRadius: 15,
-    backgroundColor: "#ffe4e1",
+    backgroundColor: '#ffe4e1',
     // box shadow
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
   },
   categoryTitle: {
-    alignSelf: "flex-start",
+    alignSelf: 'flex-start',
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     paddingLeft: 10,
   },
   heartsContainer: {
-    alignSelf: "flex-start",
-    flexDirection: "row",
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
     marginTop: 10,
     paddingLeft: 10,
   },
   heartIcon: {
     marginHorizontal: 2,
   },
-});
+})
 
-export default Dashboard;
+export default Dashboard

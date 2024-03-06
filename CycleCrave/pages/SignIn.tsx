@@ -6,49 +6,33 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Image,
 } from 'react-native'
 import { NavigationProp } from '@react-navigation/native'
-import { auth, db } from '../firebaseConfig'
+import { auth } from '../firebaseConfig'
 import {
   EmailAuthCredential,
   createUserWithEmailAndPassword,
   signInWithCredential,
   signInWithEmailAndPassword,
-  updateProfile,
 } from 'firebase/auth'
-import { ref, set } from 'firebase/database'
 
 interface RouterProps {
   navigation: NavigationProp<any, any>
 }
 
-const SignUp = ({ navigation }: RouterProps) => {
+const SignIn = ({ navigation }: RouterProps) => {
   const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
+  const logo = require('../assets/CycleCraveLogo.png')
 
-  const handleSignUp = () => {
-    createUserWithEmailAndPassword(auth, email, password)
+  const handleSignIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        // Signed up
         const user = userCredential.user
 
-        updateProfile(user, {
-          displayName: name,
-        })
-          .then(() => {
-            set(ref(db, `users/${user.uid}`), {
-              name: name,
-              nutritionplans: [],
-              hydrationGoal: 80,
-              sleepGoal: 8,
-            })
-
-            navigation.navigate('BottomTabNav')
-          })
-          .catch((error) => {
-            // Handle error updating profile
-            console.error('Error updating profile:', error)
-          })
+        // ...
 
         navigation.navigate('BottomTabNav')
       })
@@ -62,13 +46,9 @@ const SignUp = ({ navigation }: RouterProps) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
-        autoCapitalize="none"
-      />
+      <Image source={logo} resizeMode="contain" style={styles.logo}></Image>
+      <Text style={styles.name}>CycleCrave</Text>
+      <Text style={styles.subheader}>Sign In</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -83,8 +63,8 @@ const SignUp = ({ navigation }: RouterProps) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={styles.text}>Create Account</Text>
+      <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+        <Text style={styles.text}>Sign In</Text>
       </TouchableOpacity>
       <Text onPress={() => navigation.navigate('Landing')}>Back to home</Text>
     </View>
@@ -98,6 +78,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFF4F3',
   },
+  name: {
+    fontSize: 40,
+    color: '#FF898D',
+    fontFamily: 'Cormorant_700Bold',
+  },
+  subheader: {
+    fontSize: 20,
+    color: 'black',
+    fontFamily: 'Cormorant_700Bold',
+  },
   input: {
     width: '80%',
     height: 40,
@@ -107,6 +97,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#FEDBD5',
     borderColor: '#FF898D',
+  },
+  logo: {
+    maxHeight: 150,
+    maxWidth: 150,
+    marginBottom: 30,
   },
   button: {
     width: '45%',
@@ -123,4 +118,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default SignUp
+export default SignIn
