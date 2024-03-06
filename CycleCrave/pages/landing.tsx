@@ -1,13 +1,13 @@
-import * as React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
-import { NavigationProp } from '@react-navigation/native'
+import * as React from "react";
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { NavigationProp } from "@react-navigation/native";
 
 interface RouterProps {
-  navigation: NavigationProp<any, any>
+  navigation: NavigationProp<any, any>;
 }
 
 const Landing = ({ navigation }: RouterProps) => {
-  const logo = require('../assets/CycleCraveLogo.png')
+  const logo = require("../assets/CycleCraveLogo.png");
 
   return (
     <View style={styles.container}>
@@ -15,47 +15,47 @@ const Landing = ({ navigation }: RouterProps) => {
       <Text style={styles.name}>CycleCrave</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('SignUp')}
+        onPress={() => navigation.navigate("SignUp")}
       >
         <Text style={styles.text}>Sign up</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={() => navigation.navigate("SignIn")}
       >
         <Text style={styles.text}>Sign in</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Dashboard')}
       >
         <Text style={styles.text}>Dash</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFF4F3',
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFF4F3",
   },
   name: {
     fontSize: 40,
-    color: '#FF898D',
-    fontFamily: 'Cormorant_700Bold',
+    color: "#FF898D",
+    fontFamily: "Cormorant_700Bold",
   },
   button: {
-    width: '45%',
+    width: "45%",
     padding: 10,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 10,
     borderWidth: 1,
-    backgroundColor: '#FEDBD5',
-    borderColor: '#FF898D',
+    backgroundColor: "#FEDBD5",
+    borderColor: "#FF898D",
     marginTop: 50,
   },
   logo: {
@@ -66,6 +66,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
   },
-})
+});
 
-export default Landing
+export default Landing;

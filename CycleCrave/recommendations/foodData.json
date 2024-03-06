@@ -1,0 +1,189 @@
+{
+    "Salmon": {
+        "tags": [
+            "Period Cramps",
+            "Mood Swings",
+            "PMS"
+        ],
+        "benefits": "High in Omega-3, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/salmon.jpg"
+    },
+    "Egg Yolks": {
+        "tags": [
+            "Period Cramps",
+            "Mood Swings"
+        ],
+        "benefits": "High in Vitamin d, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/egg_yolks.jpg"
+    },
+    "Mushrooms": {
+        "tags": [
+            "Period Cramps",
+            "Mood Swings"
+        ],
+        "benefits": "High in Vitamin d, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/mushrooms.jpg"
+    },
+    "Milk": {
+        "tags": [
+            "Period Cramps",
+            "Mood Swings"
+        ],
+        "benefits": "High in Calcium, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/milk.jpg"
+    },
+    "Cheese": {
+        "tags": [
+            "Period Cramps",
+            "Mood Swings"
+        ],
+        "benefits": "High in Calcium, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/cheese.jpg"
+    },
+    "Yogurt": {
+        "tags": [
+            "Period Cramps",
+            "Mood Swings"
+        ],
+        "benefits": "High in Calcium, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/yogurt.jpg"
+    },
+    "Spinach": {
+        "tags": [
+            "Period Cramps"
+        ],
+        "benefits": "Rich in Alpha lipoic acid, essential for immune function and skin health.",
+        "image": "../images/spinach.jpg"
+    },
+    "Pumpkin Seeds": {
+        "tags": [
+            "Period Cramps",
+            "Mood Swings"
+        ],
+        "benefits": "High in Magnesium, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/pumpkin_seeds.jpg"
+    },
+    "Almonds": {
+        "tags": [
+            "Period Cramps",
+            "Mood Swings"
+        ],
+        "benefits": "High in Magnesium, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/almonds.jpg"
+    },
+    "Oysters": {
+        "tags": [
+            "Period Cramps",
+            "PMS"
+        ],
+        "benefits": "Rich in Zinc, essential for immune function and skin health.",
+        "image": "../images/oysters.jpg"
+    },
+    "Beef": {
+        "tags": [
+            "Period Cramps",
+            "PMS"
+        ],
+        "benefits": "Rich in Zinc, essential for immune function and skin health.",
+        "image": "../images/beef.jpg"
+    },
+    "Chicken": {
+        "tags": [
+            "Period Cramps",
+            "PMS"
+        ],
+        "benefits": "Rich in Zinc, essential for immune function and skin health.",
+        "image": "../images/chicken.jpg"
+    },
+    "Chia Seeds": {
+        "tags": [
+            "Period Cramps",
+            "PMS"
+        ],
+        "benefits": "High in Omega-3, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/chia_seeds.jpg"
+    },
+    "Walnuts": {
+        "tags": [
+            "PMS"
+        ],
+        "benefits": "High in Omega-3, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
+        "image": "../images/walnuts.jpg"
+    },
+    "Broccoli": {
+        "tags": [
+            "Period Cramps"
+        ],
+        "benefits": "Rich in Alpha lipoic acid, essential for immune function and skin health.",
+        "image": "../images/broccoli.jpg"
+    },
+    "Tomatoes": {
+        "tags": [
+            "Immune Support",
+            "Skin Health"
+        ],
+        "benefits": "Rich in Alpha lipoic acid, essential for immune function and skin health.",
+        "image": "../images/tomatoes.jpg"
+    },
+    "Whole Wheat": {
+        "tags": [
+            "Bloating",
+            "Constipation"
+        ],
+        "benefits": "A great source of fiber, supports digestive health, may help reduce bloating and improve bowel movement.",
+        "image": "../images/whole_wheat.jpg"
+    },
+    "Brown Rice": {
+        "tags": [
+            "Bloating",
+            "Constipation"
+        ],
+        "benefits": "A great source of fiber, supports digestive health, may help reduce bloating and improve bowel movement.",
+        "image": "../images/brown_rice.jpg"
+    },
+    "Quinoa": {
+        "tags": [
+            "Bloating",
+            "Constipation"
+        ],
+        "benefits": "A great source of fiber, supports digestive health, may help reduce bloating and improve bowel movement.",
+        "image": "../images/quinoa.jpg"
+    },
+    "Ginger": {
+        "tags": [
+            "Period Cramps",
+            "Nausea"
+        ],
+        "benefits": "Ginger is known for its anti-inflammatory properties, may help alleviate menstrual cramps and reduce nausea.",
+        "image": "../images/ginger.jpg"
+    },
+    "Cinnamon": {
+        "tags": [
+            "Period Cramps",
+            "Nausea"
+        ],
+        "benefits": "Cinnamon is known for its anti-inflammatory properties, may help alleviate menstrual cramps and reduce nausea.",
+        "image": "../images/cinnamon.jpg"
+    },
+    "Fenugreek Seed": {
+        "tags": [
+            "Mood Swings"
+        ],
+        "benefits": "Fenugreek Seed is recognized for its mood-enhancing properties, may help manage mood swings.",
+        "image": "../images/fenugreek_seed.jpg"
+    },
+    "Saffron": {
+        "tags": [
+            "Mood Swings"
+        ],
+        "benefits": "Saffron is recognized for its mood-enhancing properties, may help manage mood swings.",
+        "image": "../images/saffron.jpg"
+    },
+    "St John's Wort": {
+        "tags": [
+            "Mood Swings"
+        ],
+        "benefits": "St John's Wort is recognized for its mood-enhancing properties, may help manage mood swings.",
+        "image": "../images/st_john's_wort.jpg"
+    }
+}

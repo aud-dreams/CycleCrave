@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { useState } from 'react'
+import * as React from "react";
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,48 +7,47 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-} from 'react-native'
-import { NavigationProp } from '@react-navigation/native'
-import { auth } from '../firebaseConfig'
+} from "react-native";
+import { NavigationProp } from "@react-navigation/native";
+import { auth } from "../firebaseConfig";
 import {
   EmailAuthCredential,
   createUserWithEmailAndPassword,
   signInWithCredential,
   signInWithEmailAndPassword,
-} from 'firebase/auth'
+} from "firebase/auth";
 
 interface RouterProps {
-  navigation: NavigationProp<any, any>
+  navigation: NavigationProp<any, any>;
 }
 
 const SignIn = ({ navigation }: RouterProps) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const logo = require('../assets/CycleCraveLogo.png')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const logo = require("../assets/CycleCraveLogo.png");
 
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
-        const user = userCredential.user
+        const user = userCredential.user;
 
         // ...
 
-        navigation.navigate('BottomTabNav')
+        navigation.navigate("BottomTabNav");
       })
       .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
+        const errorCode = error.code;
+        const errorMessage = error.message;
         // ..
-      })
-    console.log('Email:', email, 'Password:', password)
-  }
+      });
+    console.log("Email:", email, "Password:", password);
+  };
 
   return (
     <View style={styles.container}>
-      <Image source={logo} resizeMode="contain" style={styles.logo}></Image>
-      <Text style={styles.name}>CycleCrave</Text>
-      <Text style={styles.subheader}>Sign In</Text>
+      {/* <Image source={logo} resizeMode="contain" style={styles.logo}></Image>
+      <Text style={styles.name}>CycleCrave</Text> */}
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -66,37 +65,37 @@ const SignIn = ({ navigation }: RouterProps) => {
       <TouchableOpacity style={styles.button} onPress={handleSignIn}>
         <Text style={styles.text}>Sign In</Text>
       </TouchableOpacity>
-      <Text onPress={() => navigation.navigate('Landing')}>Back to home</Text>
+      <Text onPress={() => navigation.navigate("Landing")}>Back to home</Text>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFF4F3',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#FFF4F3",
   },
   name: {
     fontSize: 40,
-    color: '#FF898D',
-    fontFamily: 'Cormorant_700Bold',
+    color: "#FF898D",
+    fontFamily: "Cormorant_700Bold",
   },
   subheader: {
     fontSize: 20,
-    color: 'black',
-    fontFamily: 'Cormorant_700Bold',
+    color: "black",
+    fontFamily: "Cormorant_700Bold",
   },
   input: {
-    width: '80%',
+    width: "80%",
     height: 40,
     padding: 10,
     borderWidth: 1,
     marginBottom: 30,
     borderRadius: 10,
-    backgroundColor: '#FEDBD5',
-    borderColor: '#FF898D',
+    backgroundColor: "#FEDBD5",
+    borderColor: "#FF898D",
   },
   logo: {
     maxHeight: 150,
@@ -104,18 +103,18 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   button: {
-    width: '45%',
+    width: "45%",
     padding: 10,
-    alignItems: 'center',
+    alignItems: "center",
     borderRadius: 10,
     borderWidth: 1,
-    backgroundColor: '#FEDBD5',
-    borderColor: '#FF898D',
+    backgroundColor: "#FEDBD5",
+    borderColor: "#FF898D",
     marginTop: 20,
   },
   text: {
     fontSize: 16,
   },
-})
+});
 
-export default SignIn
+export default SignIn;

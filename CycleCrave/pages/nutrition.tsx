@@ -1,11 +1,41 @@
-import * as React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import { useRecommendFoods } from "../recommendations/nutritionRecc";
 
-const Nutrition = () => {
-  const NewCard = ({ title }) => {
+type FoodRecommendation = {
+  foodName: string;
+  benefits: string;
+  image: string;
+};
+
+const Nutrition: React.FC = () => {
+  const [recommendations, setRecommendations] = useState<FoodRecommendation[]>(
+    []
+  );
+
+  useEffect(() => {
+    const loadRecommendations = async () => {
+      const reccs = useRecommendFoods();
+      setRecommendations(reccs);
+    };
+
+    loadRecommendations();
+  }, []);
+
+  const NewCard: React.FC<FoodRecommendation> = ({
+    foodName,
+    benefits,
+    image,
+  }) => {
     return (
       <View style={[styles.card_template]}>
-        <Text style={styles.section_title}>{title}</Text>
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={{ uri: image }}
+        />
+        <Text style={styles.section_title}>{foodName}</Text>
+        <Text style={styles.section_title}>{benefits}</Text>
       </View>
     );
   };
@@ -18,18 +48,12 @@ const Nutrition = () => {
         contentContainerStyle={styles.cardContainer}
         style={styles.scrollView}
       >
-        {/* Map through an array of titles to create a button for each */}
-        {[
-          "Whole Grains",
-          "Leafy Greens",
-          "Nuts and Seeds",
-          "Lean Proteins",
-          "Colorful Vegetables",
-          "Fruits",
-        ].map((title) => (
+        {recommendations.map((recc, i) => (
           <NewCard
-            key={title} // Use a unique key for each button
-            title={title}
+            key={i}
+            foodName={recc.foodName}
+            benefits={recc.benefits}
+            image={recc.image}
           />
         ))}
       </ScrollView>
@@ -91,6 +115,7 @@ const styles = StyleSheet.create({
   section_text: {
     marginBottom: 20,
   },
+  image: {},
 });
 
 export default Nutrition;

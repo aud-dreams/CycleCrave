@@ -1,93 +1,93 @@
-import { onValue, ref, set } from 'firebase/database'
-import React, { useEffect, useState } from 'react'
+import { onValue, ref, set } from "firebase/database";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-} from 'react-native'
-import { auth, db } from '../firebaseConfig'
+} from "react-native";
+import { auth, db } from "../firebaseConfig";
 
 const Period = () => {
   const [cravings, setCravings] = useState({
-    'Crispy Cravings': false,
-    'Fruity Cravings': false,
-    'Salty Cravings': false,
-    'Sweet Cravings': false,
+    "Crispy Cravings": false,
+    "Fruity Cravings": false,
+    "Salty Cravings": false,
+    "Sweet Cravings": false,
     Thirst: false,
-  })
+  });
 
   const [symptoms, setSymptoms] = useState({
     Bloating: false,
     Constipation: false,
     Headache: false,
-    'Mood Swings': false,
+    "Mood Swings": false,
     PMS: false,
-    'Period Cramps': false,
-  })
+    "Period Cramps": false,
+  });
 
   // Function to fetch most recent cravings and symptoms from the database
   const fetchRecentData = () => {
-    const user = auth.currentUser
+    const user = auth.currentUser;
 
     if (user) {
-      const uid = user.uid
+      const uid = user.uid;
 
       // Reference to the most recent entry in the 'cravings' node
-      const cravingsRef = ref(db, `cravings/${uid}`)
+      const cravingsRef = ref(db, `cravings/${uid}`);
       // Reference to the most recent entry in the 'symptoms' node
-      const symptomsRef = ref(db, `symptoms/${uid}`)
+      const symptomsRef = ref(db, `symptoms/${uid}`);
 
       // Fetch the most recent cravings
       onValue(cravingsRef, (snapshot) => {
-        const data = snapshot.val()
+        const data = snapshot.val();
         if (data) {
           // Get the most recent timestamp
           const mostRecentTimestamp = Object.keys(data).reduce(
             (prev, curr) => (parseInt(curr) > parseInt(prev) ? curr : prev),
-            '0'
-          )
+            "0"
+          );
           // Update cravings state with the most recent data from the database
-          setCravings(data[mostRecentTimestamp])
+          setCravings(data[mostRecentTimestamp]);
         }
-      })
+      });
 
       // Fetch the most recent symptoms
       onValue(symptomsRef, (snapshot) => {
-        const data = snapshot.val()
+        const data = snapshot.val();
         if (data) {
           // Get the most recent timestamp
           const mostRecentTimestamp = Object.keys(data).reduce(
             (prev, curr) => (parseInt(curr) > parseInt(prev) ? curr : prev),
-            '0'
-          )
+            "0"
+          );
           // Update symptoms state with the most recent data from the database
-          setSymptoms(data[mostRecentTimestamp])
+          setSymptoms(data[mostRecentTimestamp]);
         }
-      })
+      });
     }
-  }
+  };
 
   // Call the fetchRecentData function when the component mounts
   useEffect(() => {
-    fetchRecentData()
-  }, [])
+    fetchRecentData();
+  }, []);
 
   const handlePress = (category: string, title: string) => {
     return () => {
-      if (category == 'cravings')
+      if (category == "cravings")
         setCravings((prevState) => ({
           ...prevState,
           [title]: !prevState[title],
-        }))
-      else if (category == 'symptoms')
+        }));
+      else if (category == "symptoms")
         setSymptoms((prevState) => ({
           ...prevState,
           [title]: !prevState[title],
-        }))
-    }
-  }
+        }));
+    };
+  };
 
   const NewButton = ({ title, buttonPressed, handlePress }) => {
     return (
@@ -100,30 +100,30 @@ const Period = () => {
       >
         <Text>{title}</Text>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
   const saveDataToDatabase = () => {
-    const user = auth.currentUser
+    const user = auth.currentUser;
 
     if (user) {
-      const uid = user.uid
-      const timestamp = new Date().getTime()
+      const uid = user.uid;
+      const timestamp = new Date().getTime();
 
       try {
         // Save symptoms data to database
-        set(ref(db, `symptoms/${uid}/${timestamp}`), symptoms)
+        set(ref(db, `symptoms/${uid}/${timestamp}`), symptoms);
         // Save cravings data to database
-        set(ref(db, `cravings/${uid}/${timestamp}`), cravings)
+        set(ref(db, `cravings/${uid}/${timestamp}`), cravings);
 
-        console.log('Data saved to database successfully')
+        console.log("Data saved to database successfully");
       } catch (error) {
-        console.error('Error saving data to database:', error)
+        console.error("Error saving data to database:", error);
       }
     } else {
-      console.error('User not authenticated')
+      console.error("User not authenticated");
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -140,7 +140,7 @@ const Period = () => {
                 key={title} // Use a unique key for each button
                 title={title}
                 buttonPressed={!!symptoms[title]}
-                handlePress={() => handlePress('symptoms', title)}
+                handlePress={() => handlePress("symptoms", title)}
               />
             ))}
           </View>
@@ -157,84 +157,84 @@ const Period = () => {
                 key={title} // Use a unique key for each button
                 title={title}
                 buttonPressed={!!cravings[title]}
-                handlePress={() => handlePress('cravings', title)}
+                handlePress={() => handlePress("cravings", title)}
               />
             ))}
           </View>
-          <NewButton
-            key={'save'} // Use a unique key for each button
-            buttonPressed={false}
-            title={'save'}
-            handlePress={() => saveDataToDatabase}
-          />
         </View>
+        <NewButton
+          key={"save"} // Use a unique key for each button
+          buttonPressed={false}
+          title={"save"}
+          handlePress={() => saveDataToDatabase}
+        />
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start', // Center items vertically
-    alignItems: 'center', // Center items horizontally
-    backgroundColor: '#FFF4F3',
+    justifyContent: "flex-start", // Center items vertically
+    alignItems: "center", // Center items horizontally
+    backgroundColor: "#FFF4F3",
     padding: 10,
   },
   allButtons: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   buttonContainer: {
-    flexDirection: 'row', // Allow button to expand horizontally
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+    flexDirection: "row", // Allow button to expand horizontally
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
     marginVertical: 20,
     marginHorizontal: 10,
   },
   buttonPressed: {
-    backgroundColor: '#FF898D', // Change to darker color when pressed
+    backgroundColor: "#FF898D", // Change to darker color when pressed
   },
   defaultButton: {
-    backgroundColor: '#FEDBD5', // default button
+    backgroundColor: "#FEDBD5", // default button
   },
   header: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 20,
     fontSize: 35,
-    fontFamily: 'Cormorant_700Bold',
+    fontFamily: "Cormorant_700Bold",
     marginTop: 50,
     marginBottom: 20,
   },
   upperContainer: {
     flex: 6, // takes 2/3 of the screen
     paddingTop: 100,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   lowerContainer: {
     flex: 4, // takes 1/3 of the screen
-    justifyContent: 'flex-end', // align content to the bottom
+    justifyContent: "flex-end", // align content to the bottom
     paddingTop: 400,
     paddingBottom: 200, // add some padding to create space between the buttons and the bottom
   },
   card_template: {
     width: 350,
     height: 215,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     borderRadius: 10,
-    justifyContent: 'center', // Center content vertically
+    justifyContent: "center", // Center content vertically
     borderWidth: 1,
-    borderColor: '#d3d3d3',
+    borderColor: "#d3d3d3",
     paddingTop: 8,
     // box shadow
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
   },
   section_title: {
     marginTop: 20,
-    fontWeight: 'bold',
-    fontFamily: 'Cormorant_700Bold',
+    fontWeight: "bold",
+    fontFamily: "Cormorant_700Bold",
     fontSize: 25,
   },
 
@@ -246,19 +246,19 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 15, // Increase vertical padding to make the button taller
     paddingHorizontal: 25, // Increase horizontal padding to make the button wider
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFF4F3',
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFF4F3",
     borderRadius: 10,
     marginBottom: 15,
     marginHorizontal: 10,
     // box shadow
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
   },
-})
+});
 
-export default Period
+export default Period;
