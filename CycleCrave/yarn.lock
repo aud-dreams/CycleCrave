@@ -1295,7 +1295,7 @@
     node-forge "^1.2.1"
     nullthrows "^1.1.1"
 
-"@expo/config-plugins@7.8.4", "@expo/config-plugins@~7.8.0", "@expo/config-plugins@~7.8.2":
+"@expo/config-plugins@7.8.4", "@expo/config-plugins@^7.2.2", "@expo/config-plugins@~7.8.0", "@expo/config-plugins@~7.8.2":
   version "7.8.4"
   resolved "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-7.8.4.tgz"
   integrity sha512-hv03HYxb/5kX8Gxv/BTI8TLc9L06WzqAfHRRXdbar4zkLcP2oTzvsLEF4/L/TIpD3rsnYa0KU42d0gWRxzPCJg==
@@ -6110,6 +6110,13 @@ react-native-circular-progress-indicator@^4.4.2:
   integrity sha512-BlgshzIIIk0TP/CZY+5oyRsHl2Sb2l6cK5tzfmrVETfn6pN8dhOKrV0i3Z6i0SM8wRgncdUUSRBpCPAexh7JoQ==
   dependencies:
     react-native-redash "*"
+
+react-native-health@^1.18.0:
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/react-native-health/-/react-native-health-1.18.0.tgz#714f4f8445a51cb0c78fd576fef05b2f6bf1bf61"
+  integrity sha512-4CVLyBGrd6s/yPyb2/veZA0OobRP3SZ96eBZ2DunJr/1ZF3lKX3AuFFvGbCRNkycndni4VRr9T4b0MLqhXG+Hg==
+  dependencies:
+    "@expo/config-plugins" "^7.2.2"
 
 react-native-reanimated@~3.6.2:
   version "3.6.3"
