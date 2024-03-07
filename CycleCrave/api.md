@@ -14,6 +14,19 @@
 }
 ```
 
+#### `hydration/{uid}`
+
+```json
+{
+  "uid": {
+    "03-07-2024": {
+      "amount": 80,
+      "goalMet": true
+    }
+  }
+}
+```
+
 #### `symptoms/{uid}`
 
 ```json
