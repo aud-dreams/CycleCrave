@@ -54,6 +54,8 @@ export const useRecommendFoods = () => {
         });
 
         await Promise.all([fetchCravings, fetchSymptoms]);
+        // console.log(cravings);
+        // console.log(symptoms);
 
         // create recommendations
         let reccList = [];
@@ -69,12 +71,15 @@ export const useRecommendFoods = () => {
             .filter(([symptom, value]) => value)
             .map(([symptom, value]) => symptom);
 
-          for (const tag in tags) {
+          console.log(tags);
+          // console.log(trueCravings);
+
+          tags.forEach((tag) => {
+            console.log(foodName, tag);
             if (trueSymptoms.includes(tag) || trueCravings.includes(tag)) {
               reccList.push({ foodName, benefits, image });
-              break;
             }
-          }
+          });
         }
         setRecommendations(reccList);
       }

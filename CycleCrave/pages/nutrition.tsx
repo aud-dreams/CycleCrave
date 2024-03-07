@@ -9,18 +9,20 @@ type FoodRecommendation = {
 };
 
 const Nutrition: React.FC = () => {
-  const [recommendations, setRecommendations] = useState<FoodRecommendation[]>(
-    []
-  );
+  // const [recommendations, setRecommendations] = useState<FoodRecommendation[]>(
+  //   []
 
-  useEffect(() => {
-    const loadRecommendations = async () => {
-      const reccs = useRecommendFoods();
-      setRecommendations(reccs);
-    };
+  const recommendations = useRecommendFoods();
+  console.log(recommendations);
 
-    loadRecommendations();
-  }, []);
+  // useEffect(() => {
+  //   const loadRecommendations = async () => {
+
+  //     setRecommendations(reccs);
+  //   };
+
+  //   loadRecommendations();
+  // }, []);
 
   const NewCard: React.FC<FoodRecommendation> = ({
     foodName,
