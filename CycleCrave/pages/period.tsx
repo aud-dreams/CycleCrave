@@ -1,4 +1,4 @@
-import { onValue, ref, set } from "firebase/database";
+import { onValue, ref, set, update } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { auth, db } from "../firebaseConfig";
+import { getRecommendFoods } from "../recommendations/nutritionRecc";
 
 const Period = () => {
   const [cravings, setCravings] = useState({
@@ -105,7 +106,6 @@ const Period = () => {
 
   const saveDataToDatabase = () => {
     const user = auth.currentUser;
-
     if (user) {
       const uid = user.uid;
       const timestamp = new Date().getTime();
@@ -120,6 +120,14 @@ const Period = () => {
       } catch (error) {
         console.error("Error saving data to database:", error);
       }
+
+      const reccomendations = getRecommendFoods();
+      console.log(reccomendations);
+
+      // update reccomendations list for user
+      update(ref(db, `users/${user.uid}`), {
+        nutritionplans: reccomendations
+      });
     } else {
       console.error("User not authenticated");
     }
@@ -129,7 +137,7 @@ const Period = () => {
     <View style={styles.container}>
       <Text style={styles.header}> Period </Text>
 
-      <View style={styles.upperContainer}>
+      <View>
         <Text style={styles.section_title}>Symptoms</Text>
         <Text style={styles.section_text}>Select all that apply</Text>
         <View style={styles.card_template}>
@@ -146,7 +154,7 @@ const Period = () => {
           </View>
         </View>
       </View>
-      <View style={styles.lowerContainer}>
+      <View>
         <Text style={styles.section_title}>Cravings</Text>
         <Text style={styles.section_text}>Select all that apply</Text>
         <View style={styles.card_template}>
@@ -162,12 +170,14 @@ const Period = () => {
             ))}
           </View>
         </View>
-        <NewButton
-          key={"save"} // Use a unique key for each button
-          buttonPressed={false}
-          title={"save"}
-          handlePress={() => saveDataToDatabase}
-        />
+        <View style={styles.bottomButton}>
+          <NewButton
+            key={"Save"} // Use a unique key for each button
+            buttonPressed={false}
+            title={"Save"}
+            handlePress={() => saveDataToDatabase}
+          />
+        </View>
       </View>
     </View>
   );
@@ -183,6 +193,9 @@ const styles = StyleSheet.create({
   },
   allButtons: {
     alignItems: "center",
+  },
+  bottomButton: {
+    paddingTop: 40,
   },
   buttonContainer: {
     flexDirection: "row", // Allow button to expand horizontally

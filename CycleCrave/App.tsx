@@ -59,11 +59,11 @@ function App() {
           component={Hydration}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Nutrition"
           component={Nutrition}
           options={{ headerShown: false }}
-        />
+        /> */}
         <Stack.Screen
           name="Period"
           component={Period}
