@@ -1,5 +1,5 @@
 import { child, get, onValue, push, ref, set, update } from "firebase/database";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   StyleSheet,
   Text,
@@ -45,70 +45,55 @@ const pushHydrationToDatabase = (uid, date, hydrationAmount, goalMet) => {
   });
 };
 
-const updateHydrationGoal = (newGoal) => {
-  try {
-    const uid = auth.currentUser.uid;
-    const goalRef = ref(db, `users/${uid}/hydrationGoal`);
-
-    set(goalRef, newGoal)
-      .then(() => {
-        console.log("Hydration goal updated successfully");
-      })
-      .catch((error) => {
-        console.error("Error updating hydration goal:", error);
-      });
-  } catch (error) {
-    console.error("Error updating hydration goal:", error);
-  }
-};
-
 const Hydration = () => {
   const [progressValue, setProgressValue] = useState(0);
-  // goal = 100;
-  const [goal, setGoal] = useState(0); // State variable to hold the goal value
+  const [goal, setGoal] = useState(1);
+  const [isGoalFetched, setIsGoalFetched] = useState(false);
 
   useEffect(() => {
-    try {
-      // Reference to the hydration goal for the current user
-      const hydrationGoalRef = ref(
-        db,
-        `users/${auth.currentUser.uid}/hydrationGoal`
-      );
-
-      // Listen for changes to the hydration goal
-      onValue(hydrationGoalRef, (snapshot) => {
-        const goalValue = snapshot.val();
-        if (goalValue) {
-          setGoal(goalValue);
-        } else {
-          console.log("Hydration goal not found for the user!");
-        }
-      });
-    } catch (error) {
-      console.error("Error fetching hydration goal:", error);
-    }
-
-    // Cleanup function to remove the listener when the component unmounts
-    return () => {
-      // Remove the listener (not necessary in this case for Realtime Database, but good practice)
-    };
-  }, []); // Empty dependency array ensures the effect runs only once
-
-  useEffect(() => {
-    const currentDate = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
-    pushHydrationToDatabase(
-      auth.currentUser.uid,
-      currentDate,
-      progressValue,
-      progressValue >= goal
+    const hydrationGoalRef = ref(
+      db,
+      `users/${auth.currentUser.uid}/hydrationGoal`
     );
-  }, [progressValue]);
 
-  const incrementProgressBar = (amount) => {
-    // ensure progressValue doesn't exceed maxValue of 100
-    const newProgressValue = Math.min(progressValue + amount, 100);
-    setProgressValue(newProgressValue);
-  };
+    const unsubscribe = onValue(hydrationGoalRef, (snapshot) => {
+      const goalValue = snapshot.val();
+      if (goalValue !== null) {
+        setGoal(goalValue);
+        setIsGoalFetched(true); // Set true once goal is fetched
+      } else {
+        console.log("Hydration goal not found for the user!");
+      }
+    });
+
+    // Cleanup
+    return () => unsubscribe();
+  }, []);
+
+  // debounce update to db
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      if (isGoalFetched) {
+        // Ensure goal has been fetched before updating
+        const currentDate = new Date().toISOString().split("T")[0];
+        pushHydrationToDatabase(
+          auth.currentUser.uid,
+          currentDate,
+          progressValue,
+          progressValue >= goal
+        );
+      }
+    }, 1000); // Delay update for 1 second
+
+    return () => clearTimeout(timerId);
+  }, [progressValue, goal, isGoalFetched]);
+
+  const incrementProgressBar = useCallback(
+    (amount) => {
+      setProgressValue((prev) => Math.min(prev + amount, goal));
+    },
+    [goal]
+  );
 
   return (
     <View style={styles.container}>

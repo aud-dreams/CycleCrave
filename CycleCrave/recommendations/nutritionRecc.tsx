@@ -14,39 +14,58 @@ export const getRecommendFoods = async () => {
   if (!user) return []; // If user is not authenticated, return an empty array
 
   const uid = user.uid;
+  let symptoms = {};
+  let cravings = {};
   const cravingsRef = ref(db, `cravings/${uid}`);
   const symptomsRef = ref(db, `symptoms/${uid}`);
 
   // Fetch the most recent cravings
-  const cravingsSnapshot = await new Promise<DataSnapshot>((resolve) => {
+  const fetchCravings = new Promise((resolve) => {
     onValue(cravingsRef, (snapshot) => {
-      resolve(snapshot);
+      const data = snapshot.val();
+      if (data) {
+        const timestamps = Object.keys(data);
+        const mostRecentTimestamp = Math.max(...timestamps.map(Number));
+        cravings = data[mostRecentTimestamp];
+      }
+      resolve(cravings);
     });
   });
 
   // Fetch the most recent symptoms
-  const symptomsSnapshot = await new Promise<DataSnapshot>((resolve) => {
+  const fetchSymptoms = new Promise((resolve) => {
     onValue(symptomsRef, (snapshot) => {
-      resolve(snapshot);
+      const data = snapshot.val();
+      if (data) {
+        const timestamps = Object.keys(data);
+        const mostRecentTimestamp = Math.max(...timestamps.map(Number));
+        symptoms = data[mostRecentTimestamp];
+      }
+      resolve(symptoms);
     });
   });
 
-  const cravings = cravingsSnapshot.val() as Record<string, any> || {};
-  const symptoms = symptomsSnapshot.val() as Record<string, any> || {};
+  await Promise.all([fetchCravings, fetchSymptoms]);
 
   let recommendations = [];
 
   for (const [foodName, foodDetail] of Object.entries(foodData)) {
     const { tags, benefits, image } = foodDetail;
 
-    const trueSymptoms = Object.keys(symptoms).filter(symptom => symptoms[symptom]);
-    const trueCravings = Object.keys(cravings).filter(craving => cravings[craving]);
+    const trueSymptoms = Object.keys(symptoms).filter(
+      (symptom) => symptoms[symptom]
+    );
+    const trueCravings = Object.keys(cravings).filter(
+      (craving) => cravings[craving]
+    );
 
-    tags.forEach(tag => {
-      if (trueSymptoms.includes(tag) || trueCravings.includes(tag)) {
-        recommendations.push({ foodName, benefits, image });
-      }
-    });
+    const isRecommended = tags.some(
+      (tag) => trueSymptoms.includes(tag) || trueCravings.includes(tag)
+    );
+
+    if (isRecommended) {
+      recommendations.push({ foodName, benefits, image });
+    }
   }
 
   return recommendations;

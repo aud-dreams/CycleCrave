@@ -104,7 +104,7 @@ const Period = () => {
     );
   };
 
-  const saveDataToDatabase = () => {
+  const saveDataToDatabase = async () => {
     const user = auth.currentUser;
     if (user) {
       const uid = user.uid;
@@ -116,18 +116,15 @@ const Period = () => {
         // Save cravings data to database
         set(ref(db, `cravings/${uid}/${timestamp}`), cravings);
 
-        console.log("Data saved to database successfully");
+        const recommendations = await getRecommendFoods();
+
+        // update reccomendations list for user
+        update(ref(db, `users/${user.uid}`), {
+          nutritionplans: recommendations,
+        });
       } catch (error) {
         console.error("Error saving data to database:", error);
       }
-
-      const reccomendations = getRecommendFoods();
-      console.log(reccomendations);
-
-      // update reccomendations list for user
-      update(ref(db, `users/${user.uid}`), {
-        nutritionplans: reccomendations
-      });
     } else {
       console.error("User not authenticated");
     }

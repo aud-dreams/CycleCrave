@@ -33,7 +33,7 @@ const SignUp = ({ navigation }: RouterProps) => {
             set(ref(db, `users/${user.uid}`), {
               name: name,
               nutritionplans: ["hello"],
-              hydrationGoal: 0,
+              hydrationGoal: 1,
               sleepGoal: 0,
             });
 
