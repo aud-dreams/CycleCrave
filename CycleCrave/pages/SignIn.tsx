@@ -61,7 +61,9 @@ const SignIn = ({ navigation }: RouterProps) => {
       <TouchableOpacity style={styles.button} onPress={handleSignIn}>
         <Text style={styles.text}>Sign In</Text>
       </TouchableOpacity>
-      <Text onPress={() => navigation.navigate("Landing")}>Back to home</Text>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Landing")}>
+        <Text style={styles.text}>Back</Text>
+      </TouchableOpacity >
     </View>
   );
 };

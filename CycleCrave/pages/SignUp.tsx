@@ -80,8 +80,9 @@ const SignUp = ({ navigation }: RouterProps) => {
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.text}>Create Account</Text>
       </TouchableOpacity>
-      <Text onPress={() => navigation.navigate("Landing")}>Back to home</Text>
-    </View>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Landing")}>
+        <Text style={styles.text}>Back</Text>
+      </TouchableOpacity >    </View>
   );
 };
 

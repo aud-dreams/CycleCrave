@@ -33,15 +33,19 @@ const Goals = ({ navigation }: RouterProps) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.section_text}>Set a Sleep Goal (Hours)</Text>
       <TextInput
         style={styles.input}
-        placeholder="Set a Sleep Goal"
+        placeholder="8"
+        keyboardType="numeric"
         value={sleepGoal}
         onChangeText={setSleepGoal}
       />
+      <Text style={styles.section_text}>Set a Hydration Goal (Ounces)</Text>
       <TextInput
         style={styles.input}
-        placeholder="Set a Hydration Goal"
+        placeholder="100"
+        keyboardType="numeric"
         value={hydrationGoal}
         onChangeText={setHydrationGoal}
       />
@@ -68,6 +72,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "black",
     fontFamily: "Cormorant_700Bold",
+  },
+  section_text: {
+    fontSize: 15,
+    marginTop: 10,
+    marginBottom: 8,
+  },
+  unitsText: {
+    position: 'absolute',
+    left: 10,
+    fontSize: 16,
+    color: '#666',
   },
   input: {
     width: "80%",
