@@ -96,7 +96,7 @@ const Hydration = () => {
     try {
       if (prev + amount < goal) {
         Alert.alert(
-          'Woo! ✨',
+          'Woo ✨',
           'Drink ' + (goal - (prev + amount)) + ' more ounces to reach your daily hydration goal!',
           [
             {
@@ -111,7 +111,7 @@ const Hydration = () => {
       }
       else {
         Alert.alert(
-          'Congrats! 🎉',
+          'Congrats 🎉',
           'You\'ve reached your daily hydration goal!',
           [
             {
@@ -124,7 +124,6 @@ const Hydration = () => {
           },
         );
       }
-      console.log('sucessfully reached alert!');
     } catch (error) {
       console.error('Error showing alert:', error);
     }
