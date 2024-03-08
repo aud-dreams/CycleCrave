@@ -13,11 +13,12 @@ import { scoreSymptoms } from "../recommendations/scoreSymptoms";
 
 const Period = () => {
   const [cravings, setCravings] = useState({
-    "Crispy Cravings": false,
-    "Fruity Cravings": false,
-    "Salty Cravings": false,
-    "Sweet Cravings": false,
-    Thirst: false,
+    Crunchy: false,
+    Fruity: false,
+    Salty: false,
+    Sweet: false,
+    Spicy: false,
+    Thirsty: false,
   });
 
   const [symptoms, setSymptoms] = useState({
@@ -143,7 +144,7 @@ const Period = () => {
       <View>
         <Text style={styles.section_title}>Symptoms</Text>
         <Text style={styles.section_text}>Select all that apply</Text>
-        <View style={styles.card_template}>
+        <View style={styles.card_template1}>
           <View style={styles.buttonContainer}>
             {/* Map through an array of titles to create a button for each */}
             {Object.keys(symptoms).map((title) => (
@@ -160,7 +161,7 @@ const Period = () => {
       <View>
         <Text style={styles.section_title}>Cravings</Text>
         <Text style={styles.section_text}>Select all that apply</Text>
-        <View style={styles.card_template}>
+        <View style={styles.card_template2}>
           <View style={styles.buttonContainer}>
             {/* Map through an array of titles to create a button for each */}
             {Object.keys(cravings).map((title) => (
@@ -232,9 +233,24 @@ const styles = StyleSheet.create({
     paddingTop: 400,
     paddingBottom: 200, // add some padding to create space between the buttons and the bottom
   },
-  card_template: {
+  card_template1: {
     width: 350,
     height: 215,
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    justifyContent: "center", // Center content vertically
+    borderWidth: 1,
+    borderColor: "#d3d3d3",
+    paddingTop: 8,
+    // box shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+  },
+  card_template2: {
+    width: 350,
+    height: 150,
     backgroundColor: "#ffffff",
     borderRadius: 10,
     justifyContent: "center", // Center content vertically
