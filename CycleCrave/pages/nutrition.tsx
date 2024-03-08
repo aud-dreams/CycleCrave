@@ -65,13 +65,11 @@ const Nutrition: React.FC = () => {
   }) => {
     return (
       <View style={[styles.card_template]}>
-        <View style={styles.imageHolder}>
-          <Image
-            style={styles.image}
-            resizeMode="cover"
-            source={imageMap[image]}
-          />
-        </View>
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={imageMap[image]}
+        />
         <Text style={styles.section_title}>{foodName}</Text>
         <Text style={styles.section_text}>{benefits}</Text>
       </View>
@@ -123,9 +121,10 @@ const styles = StyleSheet.create({
     width: 350,
     height: 300,
     backgroundColor: "#D5ECD5",
-    borderRadius: 10,
+    borderRadius: 16,
     justifyContent: "center", // Center content vertically
-    marginBottom: 30,
+    marginTop: 15,
+    marginBottom: 20,
     borderWidth: 1,
     borderColor: "#d3d3d3",
     // box shadow
@@ -133,15 +132,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
-    padding: 10,
-  },
-  photo_template: {
-    width: 300,
-    height: 100,
-    backgroundColor: "#ffffff",
-    borderRadius: 10,
-    justifyContent: "center", // Center content vertically
-    marginBottom: 10,
   },
   section_title: {
     fontWeight: "bold",
@@ -149,7 +139,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   scrollView: {
-    maxHeight: 700, // Adjust the maximum height as needed
+    maxHeight: 650,
+    marginBottom: 70,
   },
   section_text: {
     paddingHorizontal: 15,
@@ -157,16 +148,13 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   image: {
-    width: 315, // Adjust the width as needed
-    height: 150, // Adjust the height as needed
-    borderRadius: 5, // Add b
+    width: "100%",
+    height: "60%",
+    marginTop: -20,
+    marginBottom: 20,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
-  imageHolder: {
-    padding: 15,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: 'hidden',
-  }
 });
 
 export default Nutrition;

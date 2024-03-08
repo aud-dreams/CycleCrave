@@ -78,13 +78,14 @@ const styles = StyleSheet.create({
     fontFamily: "Cormorant_700Bold",
   },
   section_text: {
-    textAlign: 'left',
+    textAlign: "left",
     fontSize: 15,
     marginTop: 10,
     marginBottom: 8,
+    paddingLeft: 18,
   },
   goalTitle: {
-    justifyContent: 'flex-start',
+    justifyContent: "flex-start",
     width: 344,
   },
   input: {

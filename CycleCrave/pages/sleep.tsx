@@ -421,7 +421,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingBottom: 100,
+    paddingBottom: 20,
   },
   sleepTitle: {
     fontWeight: "bold",
@@ -446,7 +446,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   sleepStatsContainer: {
-    width: "100%",
+    width: "110%",
     flex: 1,
     marginTop: 40,
     paddingHorizontal: 20,
@@ -504,7 +504,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   scrollView: {
-    maxHeight: 700,
+    maxHeight: 550,
+    maxWidth: "95%",
   },
   sleepGoalMessageContainer: {
     paddingHorizontal: 20,

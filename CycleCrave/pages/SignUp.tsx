@@ -81,14 +81,14 @@ const SignUp = ({ navigation }: RouterProps) => {
         secureTextEntry
       />
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={{ fontSize: 16 }}>Create Account</Text>
+        <Text style={styles.text}>Create Account</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Landing")}
       >
         <Text style={styles.text}>Back</Text>
-      </TouchableOpacity>{" "}
+      </TouchableOpacity>
     </View>
   );
 };

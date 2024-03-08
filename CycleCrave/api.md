@@ -5,7 +5,12 @@
 ```json
 {
   "uid": {
-    "email": "email@gmail.com",
+    "name": "aud",
+    "sleepGoal": 8,
+    "hydrationGoal": 100,
+    "sleepScore": 3,
+    "hydrationScore": 3,
+    "symtomScore": 3,
     "nutritionplans": {
       "plan1Id": true,
       "plan2Id": false
@@ -46,12 +51,12 @@
 {
   "uid": {
     "timestamp": {
-      "moodswings": true,
-      "headache": true,
-      "cramps": true,
-      "pms": true,
-      "bloating": true,
-      "constipation": false
+      "Mood Swings": true,
+      "Headache": true,
+      "Period Cramps": true,
+      "PMS": true,
+      "Bloating": true,
+      "Constipation": false
     }
   }
 }
@@ -63,23 +68,13 @@
 {
   "uid": {
     "timestamp": {
-      "sweet": false,
-      "salty": true,
-      "thirst": true,
-      "fruity": true,
-      "crispy": true
+      "Crunchy": false,
+      "Fruity": false,
+      "Salty": false,
+      "Sweet": false,
+      "Spicy": false,
+      "Thirsty": false
     }
-  }
-}
-```
-
-#### `nutritionplans/{planId}`
-
-```json
-{
-  "planId": {
-    "name": "Leafy Greens",
-    "description": "Iron and magnesium..."
   }
 }
 ```

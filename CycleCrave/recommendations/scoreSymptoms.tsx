@@ -2,15 +2,6 @@ import React, { useState, useEffect } from "react";
 import { DataSnapshot, onValue, ref } from "firebase/database";
 import { auth, db } from "../firebaseConfig";
 
-export interface symtomsDetail {
-  Bloating: boolean;
-  Constipation: boolean;
-  Headache: boolean;
-  "Mood Swings": boolean;
-  PMS: boolean;
-  "Period Cramps": boolean;
-}
-
 export const scoreSymptoms = async () => {
   const user = auth.currentUser;
   if (!user) return [];
@@ -38,6 +29,11 @@ export const scoreSymptoms = async () => {
 
   let keys = Object.keys(allSymptoms);
   let currentSymptoms = allSymptoms[keys[keys.length - 1]];
+
+  // if first instance of symptoms
+  if (keys.length - 2 < 0) {
+    return userData.symptomScore;
+  }
   let previousSymptoms = allSymptoms[keys[keys.length - 2]];
 
   const currentTrueSymptoms = Object.keys(currentSymptoms).filter(

@@ -3,7 +3,8 @@
         "tags": [
             "Period Cramps",
             "Mood Swings",
-            "PMS"
+            "PMS",
+            "Salty"
         ],
         "benefits": "High in Omega-3, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
         "image": "../images/salmon.jpg"
@@ -11,7 +12,8 @@
     "Egg Yolks": {
         "tags": [
             "Period Cramps",
-            "Mood Swings"
+            "Mood Swings",
+            "Salty"
         ],
         "benefits": "High in Vitamin d, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
         "image": "../images/egg_yolks.jpg"
@@ -19,7 +21,8 @@
     "Mushrooms": {
         "tags": [
             "Period Cramps",
-            "Mood Swings"
+            "Mood Swings",
+            "Salty"
         ],
         "benefits": "High in Vitamin d, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
         "image": "../images/mushrooms.jpg"
@@ -35,7 +38,8 @@
     "Cheese": {
         "tags": [
             "Period Cramps",
-            "Mood Swings"
+            "Mood Swings",
+            "Salty"
         ],
         "benefits": "High in Calcium, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
         "image": "../images/cheese.jpg"
@@ -43,7 +47,8 @@
     "Yogurt": {
         "tags": [
             "Period Cramps",
-            "Mood Swings"
+            "Mood Swings",
+            "Sweet"
         ],
         "benefits": "High in Calcium, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
         "image": "../images/yogurt.jpg"
@@ -58,7 +63,8 @@
     "Pumpkin Seeds": {
         "tags": [
             "Period Cramps",
-            "Mood Swings"
+            "Mood Swings",
+            "Crunchy"
         ],
         "benefits": "High in Magnesium, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
         "image": "../images/pumpkin_seeds.jpg"
@@ -66,7 +72,8 @@
     "Almonds": {
         "tags": [
             "Period Cramps",
-            "Mood Swings"
+            "Mood Swings",
+            "Crunchy"
         ],
         "benefits": "High in Magnesium, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
         "image": "../images/almonds.jpg"
@@ -74,7 +81,8 @@
     "Oysters": {
         "tags": [
             "Period Cramps",
-            "PMS"
+            "PMS",
+            "Salty"
         ],
         "benefits": "Rich in Zinc, essential for immune function and skin health.",
         "image": "../images/oysters.jpg"
@@ -82,7 +90,9 @@
     "Beef": {
         "tags": [
             "Period Cramps",
-            "PMS"
+            "PMS",
+            "Salty",
+            "Spicy"
         ],
         "benefits": "Rich in Zinc, essential for immune function and skin health.",
         "image": "../images/beef.jpg"
@@ -90,7 +100,9 @@
     "Chicken": {
         "tags": [
             "Period Cramps",
-            "PMS"
+            "PMS",
+            "Salty",
+            "Spicy"
         ],
         "benefits": "Rich in Zinc, essential for immune function and skin health.",
         "image": "../images/chicken.jpg"
@@ -98,21 +110,24 @@
     "Chia Seeds": {
         "tags": [
             "Period Cramps",
-            "PMS"
+            "PMS",
+            "Crunchy"
         ],
         "benefits": "High in Omega-3, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
         "image": "../images/chia_seeds.jpg"
     },
     "Walnuts": {
         "tags": [
-            "PMS"
+            "PMS",
+            "Crunchy"
         ],
         "benefits": "High in Omega-3, supports muscle and nerve function, may help alleviate menstrual cramps and improve mood.",
         "image": "../images/walnuts.jpg"
     },
     "Broccoli": {
         "tags": [
-            "Period Cramps"
+            "Period Cramps",
+            "Crunchy"
         ],
         "benefits": "Rich in Alpha lipoic acid, essential for immune function and skin health.",
         "image": "../images/broccoli.jpg"
@@ -120,7 +135,8 @@
     "Tomatoes": {
         "tags": [
             "Immune Support",
-            "Skin Health"
+            "Skin Health",
+            "Fruity"
         ],
         "benefits": "Rich in Alpha lipoic acid, essential for immune function and skin health.",
         "image": "../images/tomatoes.jpg"
@@ -152,7 +168,8 @@
     "Ginger": {
         "tags": [
             "Period Cramps",
-            "Nausea"
+            "Nausea",
+            "Spicy"
         ],
         "benefits": "Ginger is known for its anti-inflammatory properties, may help alleviate menstrual cramps and reduce nausea.",
         "image": "../images/ginger.jpg"
@@ -160,21 +177,24 @@
     "Cinnamon": {
         "tags": [
             "Period Cramps",
-            "Nausea"
+            "Nausea",
+            "Spicy"
         ],
         "benefits": "Cinnamon is known for its anti-inflammatory properties, may help alleviate menstrual cramps and reduce nausea.",
         "image": "../images/cinnamon.jpg"
     },
     "Fenugreek Seed": {
         "tags": [
-            "Mood Swings"
+            "Mood Swings",
+            "Crunchy"
         ],
         "benefits": "Fenugreek Seed is recognized for its mood-enhancing properties, may help manage mood swings.",
         "image": "../images/fenugreek_seed.jpg"
     },
     "Saffron": {
         "tags": [
-            "Mood Swings"
+            "Mood Swings",
+            "Spicy"
         ],
         "benefits": "Saffron is recognized for its mood-enhancing properties, may help manage mood swings.",
         "image": "../images/saffron.jpg"

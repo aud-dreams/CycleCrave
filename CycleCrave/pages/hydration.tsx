@@ -8,10 +8,13 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-// import { Button } from 'react-native-paper';
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome6 } from "@expo/vector-icons";
 
 import CircularProgress from "react-native-circular-progress-indicator";
 import { auth, db } from "../firebaseConfig";
+import { calculateHydrationScore } from "../recommendations/waterRecc";
 
 const pushHydrationToDatabase = (uid, date, hydrationAmount, goalMet) => {
   const hydrationRef = ref(db, `hydration/${uid}/${date}`);
@@ -87,6 +90,14 @@ const Hydration = () => {
           newValue, // Pass the updated value of progressValue
           newValue >= goal // Check against the updated value of progressValue
         );
+
+        // calculate hydration score & update db
+        const fetchHydrationScore = async () => {
+          const score = await calculateHydrationScore(auth.currentUser.uid);
+          update(ref(db, `users/${auth.currentUser.uid}`), {
+            hydrationScore: score,
+          });
+        };
         return newValue; // Return the updated value
       });
     }
@@ -154,13 +165,19 @@ const Hydration = () => {
             style={[styles.button, styles.lightBlue]}
             onPress={() => incrementProgressBar(8)}
           >
-            <Text style={styles.buttonText}>8 oz</Text>
+            <View style={styles.buttonContent}>
+              <FontAwesome6 name="droplet" size={24} color="black" />
+              <Text style={styles.buttonText}>8 oz</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, styles.mediumBlue]}
             onPress={() => incrementProgressBar(16)}
           >
-            <Text style={styles.buttonText}>16 oz</Text>
+            <View style={styles.buttonContent}>
+              <MaterialCommunityIcons name="cup" size={24} color="black" />
+              <Text style={styles.buttonText}>16 oz</Text>
+            </View>
           </TouchableOpacity>
         </View>
 
@@ -169,13 +186,23 @@ const Hydration = () => {
             style={[styles.button, styles.darkBlue]}
             onPress={() => incrementProgressBar(32)}
           >
-            <Text style={styles.buttonText}>32 oz</Text>
+            <View style={styles.buttonContent}>
+              <MaterialCommunityIcons
+                name="glass-mug"
+                size={24}
+                color="black"
+              />
+              <Text style={styles.buttonText}>32 oz</Text>
+            </View>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, styles.darkestBlue]}
             onPress={() => incrementProgressBar(64)}
           >
-            <Text style={styles.buttonText}>64 oz</Text>
+            <View style={styles.buttonContent}>
+              <FontAwesome6 name="bottle-water" size={24} color="black" />
+              <Text style={styles.buttonText}>64 oz</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -186,10 +213,13 @@ const Hydration = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "flex-start", // Center items vertically
-    // alignItems: "center", // Center items horizontally
     backgroundColor: "#FFF4F3",
     padding: 10,
+  },
+  buttonContent: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
   buttonRow: {
     flexDirection: "row", // Arrange buttons horizontally
@@ -202,9 +232,9 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   button: {
-    paddingVertical: 20, // Increase vertical padding to make the button taller
-    paddingHorizontal: 30, // Increase horizontal padding to make the button wider
-    width: 120,
+    paddingVertical: 18,
+    paddingHorizontal: 30,
+    width: 150,
     alignItems: "center",
     borderRadius: 10,
     borderWidth: 1,
@@ -249,8 +279,9 @@ const styles = StyleSheet.create({
     borderColor: "#75C1FF", // Light blue
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 19,
     color: "black",
+    marginLeft: 10,
   },
 });
 

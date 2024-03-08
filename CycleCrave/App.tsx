@@ -17,8 +17,7 @@ import Nutrition from "./pages/nutrition";
 import Period from "./pages/period";
 import SignIn from "./pages/SignIn";
 import Goals from "./pages/goals";
-import { RootSiblingParent } from 'react-native-root-siblings';
-
+import { RootSiblingParent } from "react-native-root-siblings";
 
 const Stack = createNativeStackNavigator();
 
@@ -62,11 +61,11 @@ function App() {
             component={Hydration}
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen
-          name="Nutrition"
-          component={Nutrition}
-          options={{ headerShown: false }}
-        /> */}
+          <Stack.Screen
+            name="Nutrition"
+            component={Nutrition}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="Period"
             component={Period}

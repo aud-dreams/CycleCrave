@@ -18,7 +18,6 @@ const Period = () => {
     Salty: false,
     Sweet: false,
     Spicy: false,
-    Thirsty: false,
   });
 
   const [symptoms, setSymptoms] = useState({
@@ -199,7 +198,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   bottomButton: {
-    paddingTop: 40,
+    width: 350,
+    padding: 0,
+    margin: 0,
   },
   buttonContainer: {
     flexDirection: "row", // Allow button to expand horizontally
@@ -220,7 +221,6 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontFamily: "Cormorant_700Bold",
     marginTop: 50,
-    marginBottom: 20,
   },
   upperContainer: {
     flex: 6, // takes 2/3 of the screen
@@ -247,6 +247,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
+    marginBottom: 30,
   },
   card_template2: {
     width: 350,
@@ -262,19 +263,17 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
+    marginBottom: 30,
   },
   section_title: {
-    marginTop: 20,
     fontWeight: "bold",
     fontFamily: "Cormorant_700Bold",
     fontSize: 25,
   },
-
   section_text: {
     marginTop: 10,
     marginBottom: 8,
   },
-
   button: {
     paddingVertical: 15, // Increase vertical padding to make the button taller
     paddingHorizontal: 25, // Increase horizontal padding to make the button wider
