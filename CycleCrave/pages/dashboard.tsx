@@ -5,11 +5,13 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { auth, db } from '../firebaseConfig'
 import { ref, update, onValue } from 'firebase/database'
 import { calculateSleepScore } from '../recommendations/sleepRecc'
+import { calculateHydrationScore } from '../recommendations/waterRecc'
 
 const Dashboard = () => {
   // set useStates for hearts
   const [symptomScore, setSymptomScore] = useState(0)
   const [sleepScore, setSleepScore] = useState(0)
+  const [hydrationScore, setHydrationScore] = useState(0)
 
   useEffect(() => {
     const user = auth.currentUser
@@ -30,11 +32,16 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchSleepScore = async () => {
-      const sleepScore = await calculateSleepScore(auth.currentUser.uid)
-      setSleepScore(sleepScore)
+      const score = await calculateSleepScore(auth.currentUser.uid)
+      setSleepScore(score)
+    }
+    const fetchHydrationScore = async () => {
+      const score = await calculateHydrationScore(auth.currentUser.uid)
+      setHydrationScore(score)
     }
 
     fetchSleepScore()
+    fetchHydrationScore()
   }, [])
 
   const renderHearts = (count) => {
@@ -107,7 +114,9 @@ const Dashboard = () => {
       </View>
       <View style={styles.category}>
         <Text style={styles.categoryTitle}>WATER</Text>
-        <View style={styles.heartsContainer}>{renderHearts(symptomScore)}</View>
+        <View style={styles.heartsContainer}>
+          {renderHearts(hydrationScore)}
+        </View>
       </View>
       <View style={styles.category}>
         <Text style={styles.categoryTitle}>SLEEP</Text>
