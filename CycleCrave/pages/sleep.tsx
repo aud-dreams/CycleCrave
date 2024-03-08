@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { LineChart } from "react-native-chart-kit";
+import { ref, onValue } from "firebase/database";
+import { db, auth } from "../firebaseConfig";
 
 /*
 import AppleHealthKit, {
@@ -16,6 +18,9 @@ const permissions = {
 
 const SleepPage = () => {
   const [sleepData, setSleepData] = useState([]);
+  const [sleepGoal, setSleepGoal] = useState(0); // State variable for sleep goal
+
+  const sleepLog = []; // Array to store sleep log data
 
   useEffect(() => {
     AppleHealthKit.initHealthKit(permissions, (error: string) => {
@@ -34,10 +39,46 @@ const SleepPage = () => {
             console.log("[ERROR] Failed to get samples:", callbackError);
           } else {
             console.log("Sleep samples:", results);
-            setSleepData(results.reverse());
+            setSleepData(results);
+
+            // Calculate and log the duration of sleep for each day
+            results.forEach((sleepSession) => {
+              const durationHours = (
+                (new Date(sleepSession.endDate).getTime() -
+                  new Date(sleepSession.startDate).getTime()) /
+                (1000 * 60 * 60)
+              ).toFixed(2);
+              const logEntry = `Date: ${new Date(
+                sleepSession.startDate
+              ).toLocaleDateString("en-US", {
+                month: "2-digit",
+                day: "2-digit",
+              })}, Duration: ${durationHours} hours`;
+              sleepLog.push(logEntry);
+            });
+
+            // Print the sleep log array
+            console.log("Sleep Log: ", sleepLog);
           }
         }
       );
+
+      // Fetch sleep goal from Firebase database
+      const sleepGoalRef = ref(db, `users/${auth.currentUser.uid}/sleepGoal`);
+
+      const goalUnsubscribe = onValue(sleepGoalRef, (snapshot) => {
+        const goalValue = snapshot.val();
+
+        if (goalValue !== null) {
+          setSleepGoal(goalValue);
+        } else {
+          console.log("Sleep goal not found for the user!");
+        }
+      });
+
+      return () => {
+        goalUnsubscribe();
+      };
     });
   }, []);
 
@@ -61,6 +102,9 @@ const SleepPage = () => {
     ],
   };
 
+  console.log("Chart Data:", chartData);
+  console.log("Sleep Data:", sleepData);
+
   const sleepStatsTable = (
     <View style={styles.sleepStatsContainer}>
       <Text style={styles.sleepStatsTitle}>Sleep Stats</Text>
@@ -71,33 +115,17 @@ const SleepPage = () => {
           <Text style={styles.tableHeader}>Wake up Time</Text>
           <Text style={styles.tableHeader}>Sleep Duration</Text>
         </View>
-        {sleepData.map((sleepSession, index) => (
+        {sleepLog.map((entry, index) => (
           <View style={styles.tableRow} key={index}>
-            <Text style={styles.tableCol1}>
-              {new Date(sleepSession.startDate).toLocaleDateString("en-US", {
-                month: "2-digit",
-                day: "2-digit",
-              })}
+            <Text style={styles.tableCol1}>{entry.split(", Duration")[0]}</Text>
+            <Text style={styles.tableCols2To4}>
+              {entry.split(", Duration")[1].split(" ")[1]}
             </Text>
             <Text style={styles.tableCols2To4}>
-              {new Date(sleepSession.startDate).toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+              {entry.split(", Duration")[1].split(" ")[3]}
             </Text>
             <Text style={styles.tableCols2To4}>
-              {new Date(sleepSession.endDate).toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </Text>
-            <Text style={styles.tableCols2To4}>
-              {(
-                (new Date(sleepSession.endDate).getTime() -
-                  new Date(sleepSession.startDate).getTime()) /
-                (1000 * 60 * 60)
-              ).toFixed(2)}{" "}
-              hours
+              {entry.split(", Duration")[1].split(" ")[0].split(":")[1]} hours
             </Text>
           </View>
         ))}
@@ -182,6 +210,27 @@ const sampleSleepData = [
 ];
 
 const SleepPage = () => {
+  const [sleepGoal, setSleepGoal] = useState(0); // State variable for sleep goal
+
+  useEffect(() => {
+    // Fetch sleep goal from Firebase database
+    const sleepGoalRef = ref(db, `users/${auth.currentUser.uid}/sleepGoal`);
+
+    const goalUnsubscribe = onValue(sleepGoalRef, (snapshot) => {
+      const goalValue = snapshot.val();
+
+      if (goalValue !== null) {
+        setSleepGoal(goalValue);
+      } else {
+        console.log("Sleep goal not found for the user!");
+      }
+    });
+
+    return () => {
+      goalUnsubscribe();
+    };
+  }, []);
+
   const chartData = {
     labels: sampleSleepData.map((sleepSession) => {
       return sleepSession.startDate.toLocaleDateString("en-US", {
