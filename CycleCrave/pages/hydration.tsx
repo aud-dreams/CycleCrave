@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Alert
 } from 'react-native'
 // import { Button } from 'react-native-paper';
 
@@ -77,6 +78,9 @@ const Hydration = () => {
       setProgressValue((prev) => {
         const newValue = Math.min(prev + amount, goal)
         const currentDate = new Date().toISOString().split('T')[0]
+        showAlert(prev, amount, goal);
+        console.log('hi queen 🗣️  ' + amount)
+
         pushHydrationToDatabase(
           auth.currentUser.uid,
           currentDate,
@@ -87,6 +91,44 @@ const Hydration = () => {
       })
     }
   }
+
+  const showAlert = (prev, amount, goal) => {
+    try {
+      if (prev + amount < goal) {
+        Alert.alert(
+          'Woo! ✨',
+          'Drink ' + (goal - (prev + amount)) + ' more ounces to reach your daily hydration goal!',
+          [
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+          ],
+          {
+            cancelable: true,
+          },
+        );
+      }
+      else {
+        Alert.alert(
+          'Congrats! 🎉',
+          'You\'ve reached your daily hydration goal!',
+          [
+            {
+              text: 'Cancel',
+              style: 'cancel',
+            },
+          ],
+          {
+            cancelable: true,
+          },
+        );
+      }
+      console.log('sucessfully reached alert!');
+    } catch (error) {
+      console.error('Error showing alert:', error);
+    }
+  };
 
   return (
     <View style={styles.container}>

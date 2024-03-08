@@ -17,6 +17,8 @@ import Nutrition from "./pages/nutrition";
 import Period from "./pages/period";
 import SignIn from "./pages/SignIn";
 import Goals from "./pages/goals";
+import { RootSiblingParent } from 'react-native-root-siblings';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -27,55 +29,57 @@ function App() {
   });
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Landing">
-        <Stack.Screen
-          name="BottomTabNav"
-          component={BottomTabNav}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Landing"
-          component={Landing}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUp}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignIn}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Dashboard"
-          component={Dashboard}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Hydration"
-          component={Hydration}
-          options={{ headerShown: false }}
-        />
-        {/* <Stack.Screen
+    <RootSiblingParent>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Landing">
+          <Stack.Screen
+            name="BottomTabNav"
+            component={BottomTabNav}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Landing"
+            component={Landing}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Dashboard"
+            component={Dashboard}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Hydration"
+            component={Hydration}
+            options={{ headerShown: false }}
+          />
+          {/* <Stack.Screen
           name="Nutrition"
           component={Nutrition}
           options={{ headerShown: false }}
         /> */}
-        <Stack.Screen
-          name="Period"
-          component={Period}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Goals"
-          component={Goals}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen
+            name="Period"
+            component={Period}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Goals"
+            component={Goals}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </RootSiblingParent>
   );
 }
 
