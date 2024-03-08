@@ -10,6 +10,33 @@ type FoodRecommendation = {
   image: string;
 };
 
+const imageMap = {
+  "../images/almonds.jpg": require("../images/almonds.jpg"),
+  "../images/cheese.jpg": require("../images/cheese.jpg"),
+  "../images/egg_yolks.jpg": require("../images/egg_yolk.jpg"),
+  "../images/mushrooms.jpg": require("../images/mushroom.jpg"),
+  "../images/saffron.jpg": require("../images/saffron.jpg.webp"),
+  "../images/tomatoes.jpg": require("../images/tomatoes.jpg"),
+  "../images/beef.jpg": require("../images/beef.jpg"),
+  "../images/chia_seeds.jpg": require("../images/chia_seeds.jpg"),
+  "../images/fenugreek_seed.jpg": require("../images/fenugreek_seeds.jpg"),
+  "../images/oysters.jpg": require("../images/oysters.jpg"),
+  "../images/salmon.jpg": require("../images/salmon.jpg"),
+  "../images/walnuts.jpg": require("../images/walnuts.jpg"),
+  "../images/broccoli.jpg": require("../images/broccoli.jpg"),
+  "../images/chicken.jpg": require("../images/chicken.jpg"),
+  "../images/ginger.jpg": require("../images/ginger.jpg"),
+  "../images/pumpkin_seeds.jpg": require("../images/pumpkin_seeds.jpg"),
+  "../images/spinach.jpg": require("../images/spinach.jpg"),
+  "../images/whole_wheat.jpg": require("../images/whole_wheat.jpg"),
+  "../images/brown_rice.jpg": require("../images/brown_rice.jpg"),
+  "../images/cinnamon.jpg": require("../images/cinnamon.jpg"),
+  "../images/milk.jpg": require("../images/milk.jpg"),
+  "../images/quinoa.jpg": require("../images/quinoa.jpg"),
+  "../images/st_john's_wort.jpg": require("../images/st_johns_wort.jpg"),
+  "../images/yogurt.jpg": require("../images/yogurt.jpg"),
+};
+
 const Nutrition: React.FC = () => {
   // get nutrition plan from user
   const [plan, setPlan] = useState<FoodRecommendation[]>([]);
@@ -41,7 +68,7 @@ const Nutrition: React.FC = () => {
         <Image
           style={styles.image}
           resizeMode="cover"
-          source={{ uri: image }}
+          source={imageMap[image]}
         />
         <Text style={styles.section_title}>{foodName}</Text>
         <Text style={styles.section_title}>{benefits}</Text>
@@ -124,7 +151,11 @@ const styles = StyleSheet.create({
   section_text: {
     marginBottom: 20,
   },
-  image: {},
+  image: {
+    width: 100, // Adjust the width as needed
+    height: 100, // Adjust the height as needed
+    borderRadius: 5, // Add b
+  },
 });
 
 export default Nutrition;
