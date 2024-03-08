@@ -65,13 +65,15 @@ const Nutrition: React.FC = () => {
   }) => {
     return (
       <View style={[styles.card_template]}>
-        <Image
-          style={styles.image}
-          resizeMode="cover"
-          source={imageMap[image]}
-        />
+        <View style={styles.imageHolder}>
+          <Image
+            style={styles.image}
+            resizeMode="cover"
+            source={imageMap[image]}
+          />
+        </View>
         <Text style={styles.section_title}>{foodName}</Text>
-        <Text style={styles.section_title}>{benefits}</Text>
+        <Text style={styles.section_text}>{benefits}</Text>
       </View>
     );
   };
@@ -131,6 +133,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 6,
+    padding: 10,
   },
   photo_template: {
     width: 300,
@@ -149,13 +152,21 @@ const styles = StyleSheet.create({
     maxHeight: 700, // Adjust the maximum height as needed
   },
   section_text: {
-    marginBottom: 20,
+    paddingHorizontal: 15,
+    paddingBottom: 15,
+    paddingTop: 10,
   },
   image: {
-    width: 100, // Adjust the width as needed
-    height: 100, // Adjust the height as needed
+    width: 315, // Adjust the width as needed
+    height: 150, // Adjust the height as needed
     borderRadius: 5, // Add b
   },
+  imageHolder: {
+    padding: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: 'hidden',
+  }
 });
 
 export default Nutrition;

@@ -33,7 +33,9 @@ const Goals = ({ navigation }: RouterProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.section_text}>Set a Sleep Goal (Hours)</Text>
+      <View style={styles.goalTitle}>
+        <Text style={styles.section_text}>Set a Sleep Goal (Hours)</Text>
+      </View>
       <TextInput
         style={styles.input}
         placeholder="Ex: 8"
@@ -41,7 +43,9 @@ const Goals = ({ navigation }: RouterProps) => {
         value={sleepGoal}
         onChangeText={setSleepGoal}
       />
-      <Text style={styles.section_text}>Set a Hydration Goal (Ounces)</Text>
+      <View style={styles.goalTitle}>
+        <Text style={styles.section_text}>Set a Hydration Goal (Ounces)</Text>
+      </View>
       <TextInput
         style={styles.input}
         placeholder="Ex: 100"
@@ -79,7 +83,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 8,
   },
-
+  goalTitle: {
+    justifyContent: 'flex-start',
+    width: 344,
+  },
   input: {
     width: "80%",
     height: 40,
