@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { auth, db } from "../firebaseConfig";
 import { getRecommendFoods } from "../recommendations/nutritionRecc";
+import { scoreSymptoms } from "../recommendations/scoreSymptoms";
 
 const Period = () => {
   const [cravings, setCravings] = useState({
@@ -121,6 +122,11 @@ const Period = () => {
         // update reccomendations list for user
         update(ref(db, `users/${user.uid}`), {
           nutritionplans: recommendations,
+        });
+
+        const symptomScore = await scoreSymptoms();
+        update(ref(db, `users/${user.uid}`), {
+          symptomScore: symptomScore,
         });
       } catch (error) {
         console.error("Error saving data to database:", error);

@@ -35,6 +35,9 @@ const SignUp = ({ navigation }: RouterProps) => {
               nutritionplans: ["hello"],
               hydrationGoal: 1,
               sleepGoal: 0,
+              symptomScore: 3,
+              sleepScore: 3,
+              hydrationScore: 3,
             });
 
             navigation.navigate("Goals");

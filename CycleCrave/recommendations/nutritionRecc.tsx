@@ -1,6 +1,5 @@
-import { DataSnapshot, onValue, ref } from "firebase/database";
+import { onValue, ref } from "firebase/database";
 import { auth, db } from "../firebaseConfig";
-import { useEffect, useState } from "react";
 import foodData from "./foodData.json";
 
 export interface FoodDetail {
