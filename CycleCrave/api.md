@@ -27,6 +27,19 @@
 }
 ```
 
+#### `sleep/{uid}`
+
+```json
+{
+  "uid": {
+    "03-07-2024": {
+      "amount": 7,
+      "goalMet": true
+    }
+  }
+}
+```
+
 #### `symptoms/{uid}`
 
 ```json

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { LineChart } from "react-native-chart-kit";
-import { ref, onValue } from "firebase/database";
-import { db, auth } from "../firebaseConfig";
+import React, { useEffect, useState } from 'react'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { LineChart } from 'react-native-chart-kit'
+import { ref, onValue, set } from 'firebase/database'
+import { db, auth } from '../firebaseConfig'
 
 /*
 import AppleHealthKit, {
@@ -180,63 +180,73 @@ const SleepPage = () => {
 
 const sampleSleepData = [
   {
-    startDate: new Date("2024-03-03T02:00:00"),
-    endDate: new Date("2024-03-03T07:00:00"),
+    startDate: new Date('2024-03-03T02:00:00'),
+    endDate: new Date('2024-03-03T07:00:00'),
   }, // Sun
   {
-    startDate: new Date("2024-03-03T23:50:00"),
-    endDate: new Date("2024-03-04T08:00:00"),
+    startDate: new Date('2024-03-03T23:50:00'),
+    endDate: new Date('2024-03-04T08:00:00'),
   }, // Mon
   {
-    startDate: new Date("2024-03-04T22:30:00"),
-    endDate: new Date("2024-03-05T06:15:00"),
+    startDate: new Date('2024-03-04T22:30:00'),
+    endDate: new Date('2024-03-05T06:15:00'),
   }, // Tue
   {
-    startDate: new Date("2024-03-05T23:30:00"),
-    endDate: new Date("2024-03-06T09:00:00"),
+    startDate: new Date('2024-03-05T23:30:00'),
+    endDate: new Date('2024-03-06T09:00:00'),
   }, // Wed
   {
-    startDate: new Date("2024-03-06T22:45:00"),
-    endDate: new Date("2024-03-07T07:30:00"),
+    startDate: new Date('2024-03-06T22:45:00'),
+    endDate: new Date('2024-03-07T07:30:00'),
   }, // Thu
   {
-    startDate: new Date("2024-03-07T23:15:00"),
-    endDate: new Date("2024-03-08T06:30:00"),
+    startDate: new Date('2024-03-07T23:15:00'),
+    endDate: new Date('2024-03-08T06:30:00'),
   }, // Fri
   {
-    startDate: new Date("2024-03-08T21:45:00"),
-    endDate: new Date("2024-03-09T07:00:00"),
+    startDate: new Date('2024-03-08T21:45:00'),
+    endDate: new Date('2024-03-09T07:00:00'),
   }, // Sat
-];
+]
+
+const pushHydrationToDatabase = (uid, date, duration, goalMet) => {
+  const sleepRef = ref(db, `sleep/${uid}/${date}`)
+
+  // Set the data at the specified path
+  set(sleepRef, {
+    amount: duration,
+    goalMet: goalMet,
+  })
+}
 
 const SleepPage = () => {
-  const [sleepGoal, setSleepGoal] = useState(0); // State variable for sleep goal
+  const [sleepGoal, setSleepGoal] = useState(0) // State variable for sleep goal
 
   useEffect(() => {
     // Fetch sleep goal from Firebase database
-    const sleepGoalRef = ref(db, `users/${auth.currentUser.uid}/sleepGoal`);
+    const sleepGoalRef = ref(db, `users/${auth.currentUser.uid}/sleepGoal`)
 
     const goalUnsubscribe = onValue(sleepGoalRef, (snapshot) => {
-      const goalValue = snapshot.val();
+      const goalValue = snapshot.val()
 
       if (goalValue !== null) {
-        setSleepGoal(goalValue);
+        setSleepGoal(goalValue)
       } else {
-        console.log("Sleep goal not found for the user!");
+        console.log('Sleep goal not found for the user!')
       }
-    });
+    })
 
     return () => {
-      goalUnsubscribe();
-    };
-  }, []);
+      goalUnsubscribe()
+    }
+  }, [])
 
   const chartData = {
     labels: sampleSleepData.map((sleepSession) => {
-      return sleepSession.startDate.toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-      });
+      return sleepSession.startDate.toLocaleDateString('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+      })
     }),
     datasets: [
       {
@@ -245,11 +255,37 @@ const SleepPage = () => {
             (sleepSession.endDate.getTime() -
               sleepSession.startDate.getTime()) /
             (1000 * 60 * 60)
-          );
+          )
         }),
       },
     ],
-  };
+  }
+
+  const chartData2: { [dateKey: string]: number } = sampleSleepData.reduce(
+    (data, sleepSession) => {
+      const startDateKey = sleepSession.startDate.toISOString().split('T')[0]
+
+      const duration =
+        (sleepSession.endDate.getTime() - sleepSession.startDate.getTime()) /
+        (1000 * 60 * 60)
+
+      return { ...data, [startDateKey]: duration }
+    },
+    {}
+  )
+
+  Object.entries(chartData2).forEach(([dateKey, duration]) => {
+    // Construct the path for Firebase
+    const firebasePath = `sleep/${auth.currentUser.uid}/${dateKey}`
+
+    // Push the changes to Firebase
+    pushHydrationToDatabase(
+      auth.currentUser.uid,
+      dateKey,
+      duration,
+      duration >= sleepGoal
+    )
+  })
 
   const sleepStatsTable = (
     <View style={styles.sleepStatsContainer}>
@@ -264,21 +300,21 @@ const SleepPage = () => {
         {sampleSleepData.map((sleepSession, index) => (
           <View style={styles.tableRow} key={index}>
             <Text style={styles.tableCol1}>
-              {sleepSession.startDate.toLocaleDateString("en-US", {
-                month: "2-digit",
-                day: "2-digit",
+              {sleepSession.startDate.toLocaleDateString('en-US', {
+                month: '2-digit',
+                day: '2-digit',
               })}
             </Text>
             <Text style={styles.tableCols2To4}>
-              {sleepSession.startDate.toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
+              {sleepSession.startDate.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
               })}
             </Text>
             <Text style={styles.tableCols2To4}>
-              {sleepSession.endDate.toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
+              {sleepSession.endDate.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
               })}
             </Text>
             <Text style={styles.tableCols2To4}>
@@ -286,14 +322,14 @@ const SleepPage = () => {
                 (sleepSession.endDate.getTime() -
                   sleepSession.startDate.getTime()) /
                 (1000 * 60 * 60)
-              ).toFixed(2)}{" "}
+              ).toFixed(2)}{' '}
               hours
             </Text>
           </View>
         ))}
       </View>
     </View>
-  );
+  )
 
   return (
     <View style={styles.container}>
@@ -311,9 +347,9 @@ const SleepPage = () => {
             yAxisSuffix="h"
             yAxisInterval={1}
             chartConfig={{
-              backgroundColor: "#ffffff",
-              backgroundGradientFrom: "#ffffff",
-              backgroundGradientTo: "#ffffff",
+              backgroundColor: '#ffffff',
+              backgroundGradientFrom: '#ffffff',
+              backgroundGradientTo: '#ffffff',
               decimalPlaces: 0,
               color: (opacity = 1) => `rgba(117, 193, 255, ${opacity})`,
               labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
@@ -321,12 +357,12 @@ const SleepPage = () => {
                 borderRadius: 16,
               },
               propsForDots: {
-                r: "2",
-                strokeWidth: "2",
-                stroke: "#75C1FF",
+                r: '2',
+                strokeWidth: '2',
+                stroke: '#75C1FF',
               },
               propsForBackgroundLines: {
-                stroke: "75C1FF",
+                stroke: '75C1FF',
               },
             }}
             style={styles.chart}
@@ -336,27 +372,27 @@ const SleepPage = () => {
         {sleepStatsTable}
       </ScrollView>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
-    backgroundColor: "#FFF4F3",
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#FFF4F3',
     padding: 10,
   },
   sleepContainer: {
     flexGrow: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   sleepTitle: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginVertical: 20,
     fontSize: 35,
-    fontFamily: "Cormorant_700Bold",
+    fontFamily: 'Cormorant_700Bold',
     marginTop: 50,
     marginBottom: 20,
   },
@@ -366,9 +402,9 @@ const styles = StyleSheet.create({
   },
   sleepGraphTitle: {
     fontSize: 25,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 20,
-    fontFamily: "Cormorant_700Bold",
+    fontFamily: 'Cormorant_700Bold',
   },
   chart: {
     marginVertical: 8,
@@ -381,49 +417,49 @@ const styles = StyleSheet.create({
   },
   sleepStatsTitle: {
     fontSize: 25,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 10,
-    fontFamily: "Cormorant_700Bold",
+    fontFamily: 'Cormorant_700Bold',
   },
   tableContainer: {
     marginTop: 20,
-    width: "100%",
+    width: '100%',
     borderWidth: 1,
-    borderColor: "#ffffff",
+    borderColor: '#ffffff',
     borderRadius: 10,
-    overflow: "hidden",
-    backgroundColor: "#ffffff",
+    overflow: 'hidden',
+    backgroundColor: '#ffffff',
   },
   tableRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
     borderBottomWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     padding: 10,
   },
   tableHeader: {
     flex: 1,
-    fontWeight: "bold",
-    textAlign: "center",
-    fontFamily: "Cormorant_700Bold",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'Cormorant_700Bold',
     padding: 10,
   },
   tableCol1: {
     flex: 1,
-    textAlign: "center",
+    textAlign: 'center',
     paddingVertical: 8,
     paddingHorizontal: 8,
   },
   tableCols2To4: {
     flex: 1,
-    textAlign: "center",
+    textAlign: 'center',
     paddingVertical: 8,
     paddingHorizontal: 8,
     borderRadius: 20,
-    backgroundColor: "rgba(117, 193, 255, 0.35)",
+    backgroundColor: 'rgba(117, 193, 255, 0.35)',
   },
   scrollView: {
     maxHeight: 700,
   },
-});
+})
 
-export default SleepPage;
+export default SleepPage
