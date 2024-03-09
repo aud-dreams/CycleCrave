@@ -151,11 +151,12 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     fontSize: 35,
     fontFamily: "Cormorant_700Bold",
-    paddingLeft: 10,
+    paddingLeft: 30,
     marginTop: 50,
   },
   category: {
-    width: 350,
+    // width: 350,
+    width: 340,
     alignItems: "center",
     marginVertical: 15,
     padding: 10,
@@ -189,7 +190,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   scrollView: {
-    maxHeight: 650,
+    // maxHeight: 650,
+    maxHeight: 700,
   },
 });
 

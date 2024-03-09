@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginTop: 10,
     marginBottom: 8,
-    paddingLeft: 18,
+    paddingLeft: 2,
   },
   goalTitle: {
     justifyContent: "flex-start",

@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   scrollView: {
-    maxHeight: 650,
+    maxHeight: 750,
     marginBottom: 70,
   },
   section_text: {

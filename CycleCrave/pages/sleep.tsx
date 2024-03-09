@@ -262,7 +262,9 @@ const SleepPage = () => {
   const sleepGoalMessage =
     sleepGoalComparison === "achieved"
       ? `🌟 Yay, you met your sleep goal of ${sleepGoal} hrs last night!`
-      : `🌙 You did not meet your sleep goal of ${sleepGoal} hrs last night. \n💤Sleep ${Math.ceil(sleepGoal - lastNightDurationHours)} more hours tonight than you did last night to reach your sleep goal!`;
+      : `🌙 You did not meet your sleep goal of ${sleepGoal} hrs last night. \n💤Sleep ${Math.ceil(
+          sleepGoal - lastNightDurationHours
+        )} more hours tonight than you did last night to reach your sleep goal!`;
 
   const chartData = {
     labels: sampleSleepData.map((sleepSession) => {
@@ -446,7 +448,8 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   sleepStatsContainer: {
-    width: "110%",
+    // width: "110",
+    width: "100%",
     flex: 1,
     marginTop: 40,
     paddingHorizontal: 20,
@@ -504,7 +507,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   scrollView: {
-    maxHeight: 550,
+    // maxHeight: 550,
+    maxHeight: 660,
     maxWidth: "95%",
   },
   sleepGoalMessageContainer: {
