@@ -262,7 +262,7 @@ const SleepPage = () => {
   const sleepGoalMessage =
     sleepGoalComparison === "achieved"
       ? `🌟 Yay, you met your sleep goal of ${sleepGoal} hrs last night!`
-      : `🌙 You did not meet your sleep goal of ${sleepGoal} hrs last night, try to sleep earlier tonight.`;
+      : `🌙 You did not meet your sleep goal of ${sleepGoal} hrs last night. \n💤Sleep ${Math.ceil(sleepGoal - lastNightDurationHours)} more hours tonight than you did last night to reach your sleep goal!`;
 
   const chartData = {
     labels: sampleSleepData.map((sleepSession) => {
