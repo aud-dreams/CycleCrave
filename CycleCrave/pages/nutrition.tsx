@@ -51,6 +51,9 @@ const Nutrition: React.FC = () => {
         if (data && data["nutritionplans"]) {
           setPlan(data["nutritionplans"]);
         }
+        if (data["nutritionplans"] == "hello") {
+          setPlan([]); // otherwise, set to empty array to indicate no recommendations found yet
+        }
       });
       return () => unsubscribe();
     }
@@ -76,26 +79,48 @@ const Nutrition: React.FC = () => {
     );
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}> Nutrition </Text>
+  if (!plan || plan.length == 0) {
+    console.log("\nno symptoms!");
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}> Nutrition </Text>
+        <ScrollView
+          contentContainerStyle={styles.cardContainer}
+          style={styles.scrollView}
+        >
+          <View style={[styles.card_template]}>
+            <View style={styles.default_msg}>
+              <Text style={styles.default_text}>Please input your symptoms and cravings!</Text>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+  else {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}> Nutrition </Text>
 
-      <ScrollView
-        contentContainerStyle={styles.cardContainer}
-        style={styles.scrollView}
-      >
-        {plan.map((recc, i) => (
-          <NewCard
-            key={i}
-            foodName={recc.foodName}
-            benefits={recc.benefits}
-            image={recc.image}
-          />
-        ))}
-      </ScrollView>
-    </View>
-  );
-};
+        <ScrollView
+          contentContainerStyle={styles.cardContainer}
+          style={styles.scrollView}
+        >
+          {plan.map((recc, i) => (
+            <NewCard
+              key={i}
+              foodName={recc.foodName}
+              benefits={recc.benefits}
+              image={recc.image}
+            />
+          ))}
+        </ScrollView>
+      </View>
+    );
+  };
+}
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -146,6 +171,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingBottom: 15,
     paddingTop: 10,
+  },
+  default_text: {
+    paddingHorizontal: 15,
+    paddingBottom: 15,
+    paddingTop: 10,
+    fontSize: 15,
+  },
+  default_msg: {
+    alignItems: 'center'
   },
   image: {
     width: "100%",
